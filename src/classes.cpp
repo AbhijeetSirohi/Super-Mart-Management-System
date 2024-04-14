@@ -9,7 +9,7 @@ public:
      string cust_passwd;
      string cust_phone_no;
      int discount;
-}
+};
 
 
 class product{
@@ -25,12 +25,12 @@ public:
 
 };
 
-class clothes:public{
+class clothes{
 public:
     string gender;
     string csize;
     string brand;
-    string 
+    
 
 
 
@@ -43,4 +43,4 @@ public:
 
 
 
-};
+
