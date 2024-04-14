@@ -4,7 +4,7 @@ jai mata di
 jai bajrangbalipush p
 # Super-Mart-Management-System 
 <br>
-#Author:Atul
+#Author:Atul Sharma
 
 # Super-Mart-Management-System 
 <br>
