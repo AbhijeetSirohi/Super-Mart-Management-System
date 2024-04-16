@@ -18,9 +18,7 @@ public:
         }
      }
 
-};
-
- customer(const string& name, const string& mail, const string& passwd, const string& phone_no, float spent) :
+      customer(const string& name, const string& mail, const string& passwd, const string& phone_no, float spent) :
         cust_name(name),
         cust_mail(mail),
         cust_passwd(passwd),
@@ -30,6 +28,12 @@ public:
     {
         check_star_cust(); // Check if the customer qualifies for a star customer discount
     }
+
+};
+
+
+
+
 
 
 
@@ -42,52 +46,51 @@ public:
     float selling_price;
     float cost_price;
     int items_sold;/*quantity sold*/
-
+     string brand;
 
 
 
 };
 
-class clothes{
+class clothes:public product{
 public:
     string gender;
     string csize;
-    string brand;
+   
     string colour;
     
 };
 
-class books{
-public:
-   string author;
-   string genre;
-
-
-
-};
 
 class food{
     public:
     string category;  /*veg or nonveg*/
-    string brand;
+    
 
 
 
 };
 
-class shoes{
+class stationary:public product{
+public:
+       
+
+       
+
+};
+
+class gadgets:public product{
     public:
-    string brand;
-    int size;
-    string gender;
+            string brand;
+
 
 
 };
 
-class medicine{
+class healthcare:public product{
     public:
-    string disease;
-    float weight; /*weight in mg*/
+    
+    
 
 
 };
@@ -100,13 +103,25 @@ class staff{
     float salary;
     string staff_phone_no;
     string staff_mail;
+   string staff_type;
 
 
+staff(int id, const std::string& name, const std::string& gen, float sal, const std::string& phone_no, const std::string& mail, const std::string& type) :
+        staff_id(id),
+        staff_name(name),
+        gender(gen),
+        salary(sal),
+        staff_phone_no(phone_no),
+        staff_mail(mail),
+        staff_type(type)
+    {}
     
 
 };
 
 class manager:public staff{
+
+
 public:
 void pos();/*star product and bills*/
 void inventory();/**/
@@ -115,6 +130,12 @@ void terminate_add_staff();
 void customerdetails();
 
 
+
+};
+
+class inventory_staff:public staff{
+    public:
+void inventory();
 
 };
     
