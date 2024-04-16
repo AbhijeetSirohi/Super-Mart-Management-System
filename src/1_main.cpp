@@ -2,7 +2,34 @@
 #include <limits> // for clearing input buffer
 #include <conio.h> // for _getch()
 using namespace std;
-
+void blue()
+{
+    cout<<"\033[0;34m";
+}
+void purple()
+{
+    cout<<"\033[0;35m";
+}
+void red()
+{
+    cout<<"\033[0;31m";
+}
+void green()
+{
+    cout<<"\033[0;32m";
+}
+void yellow()
+{
+    cout<<"\033[0;33m";
+}
+void reset()
+{
+    cout<<"\033[0m";
+}
+void highlight()
+{
+    cout<<"\033[0;41m";
+}
 /*
 customer* customerptr[100];
 static int i=5;
