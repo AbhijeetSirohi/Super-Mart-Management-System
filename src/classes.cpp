@@ -8,8 +8,30 @@ public:
      string cust_mail;
      string cust_passwd;
      string cust_phone_no;
-     int discount;
+     float discount;
+     float amount_spent;
+    /* int star_customer;1 if yes 0 if no */
+
+     void check_star_cust(){
+        if(amount_spent>50000.0){
+            discount=10;
+        }
+     }
+
 };
+
+ customer(const string& name, const string& mail, const string& passwd, const string& phone_no, float spent) :
+        cust_name(name),
+        cust_mail(mail),
+        cust_passwd(passwd),
+        cust_phone_no(phone_no),
+        discount(0.0), // Assuming discount starts at 0
+        amount_spent(spent)
+    {
+        check_star_cust(); // Check if the customer qualifies for a star customer discount
+    }
+
+
 
 
 class product{
