@@ -30,6 +30,34 @@ void highlight()
 {
     cout<<"\033[0;41m";
 }
+
+class customer{
+public:
+     string cust_name;
+     string cust_mail;
+     string cust_passwd;
+     string cust_phone_no;
+     float discount;
+     float amount_spent;
+    /* int star_customer;1 if yes 0 if no */
+
+     void check_star_cust(){
+        if(amount_spent>50000.0){
+            discount=10;
+        }
+     }
+      customer(const string& name, const string& mail, const string& passwd, const string& phone_no, float spent) :
+        cust_name(name),
+        cust_mail(mail),
+        cust_passwd(passwd),
+        cust_phone_no(phone_no),
+        discount(0.0), // Assuming discount starts at 0
+        amount_spent(spent)
+    {
+        check_star_cust(); // Check if the customer qualifies for a star customer discount
+    }
+};
+
 /*
 customer* customerptr[100];
 static int i=5;
@@ -37,18 +65,33 @@ void existing_users()
 {
     o-customerptr[0]=
 }
-void new_users()
-{
-    for(;i<100;i++){
-    cin>>customerptr[i]->
-    }
-}
+*/
 
 void signin()
 {
-    
+    customer c;
+
+    string pnum //customer phone number
+    cout<<"Enter your ID(Phone number): to SignIn:";
+    return 0;
+    //if(pnum==c.cust_phone_no)
+
 }
-*/
+
+
+void signup() //newuser
+{
+    customer c;
+    cout<<"Hi!Welcome to AGRAMART :)\nEnter your name: ";
+    cin>>c.cust_name;
+     cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cout<<"Enter your Mail-ID: ";
+    cin>>c.cust_mail;
+    cout<<"Enter Phone-num: ";
+    cin>>c.cust_phone_no;
+    c.amount_spent=0;
+}
+
 
 void displayFrontPage() {
     system("cls"); // Clear the console screen
