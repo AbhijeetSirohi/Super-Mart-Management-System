@@ -199,6 +199,64 @@ staff(int id, const std::string& name, const std::string& gen, float sal, const 
         staff_mail(mail),
         staff_type(type)
     {}
+
+    // Getter functions
+    int get_staff_id() const {
+        return staff_id;
+    }
+
+    std::string get_staff_name() const {
+        return staff_name;
+    }
+
+    std::string get_gender() const {
+        return gender;
+    }
+
+    float get_salary() const {
+        return salary;
+    }
+
+    std::string get_staff_phone_no() const {
+        return staff_phone_no;
+    }
+
+    std::string get_staff_mail() const {
+        return staff_mail;
+    }
+
+    std::string get_staff_type() const {
+        return staff_type;
+    }
+
+    // Setter functions
+    void set_staff_id(int id) {
+        staff_id = id;
+    }
+
+    void set_staff_name(const std::string& name) {
+        staff_name = name;
+    }
+
+    void set_gender(const std::string& gen) {
+        gender = gen;
+    }
+
+    void set_salary(float sal) {
+        salary = sal;
+    }
+
+    void set_staff_phone_no(const std::string& phone_no) {
+        staff_phone_no = phone_no;
+    }
+
+    void set_staff_mail(const std::string& mail) {
+        staff_mail = mail;
+    }
+
+    void set_staff_type(const std::string& type) {
+        staff_type = type;
+    }
     
 
 };
