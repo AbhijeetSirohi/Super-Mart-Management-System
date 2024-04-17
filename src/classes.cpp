@@ -55,6 +55,33 @@ public:
           cost_price(cost), items_sold(sold), brand(brand_name) {
     }
 
+     int getProductId() const {
+        return product_id;
+    }
+
+    string getProductName() const {
+        return product_name;
+    }
+
+    int getStockQuantity() const {
+        return stock_quantity;
+    }
+
+    float getSellingPrice() const {
+        return selling_price;
+    }
+
+    float getCostPrice() const {
+        return cost_price;
+    }
+
+    int getItemsSold() const {
+        return items_sold;
+    }
+
+    string getBrand() const {
+        return brand;
+    }
 
 };
 
