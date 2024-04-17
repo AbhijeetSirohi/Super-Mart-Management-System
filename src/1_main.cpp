@@ -40,7 +40,7 @@ public:
      float discount;
      float amount_spent;
     /* int star_customer;1 if yes 0 if no */
-
+    customer(){};
      void check_star_cust(){
         if(amount_spent>50000.0){
             discount=10;
@@ -71,9 +71,9 @@ void signin()
 {
     customer c;
 
-    string pnum //customer phone number
+    string pnum; //customer phone number
     cout<<"Enter your ID(Phone number): to SignIn:";
-    return 0;
+    
     //if(pnum==c.cust_phone_no)
 
 }
@@ -156,7 +156,7 @@ int main() {
                 signInValid = true;
                 break;
             case 2:
-                // Call your signup function here
+                signup();
                 signInValid = true;
                 break;
             default:
