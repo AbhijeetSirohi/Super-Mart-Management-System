@@ -76,8 +76,9 @@ void signin()
     cin>>pnum;
     cout<<"Enter your password: to SignIn:";
     cin>>pswd;
+    int i=0;
 ifstream myfile("cust_file.txt");
-   if (myfile.is_open()) { // Check if the file is open
+   
         string first_name, email, phone_no, password ,last_name;
         float amt_spent;
         int discount;
@@ -86,14 +87,17 @@ ifstream myfile("cust_file.txt");
                 first_name=first_name+" "+last_name;
                 cout<<first_name;
                 customer C(first_name, email, phone_no , password , amt_spent,discount);
+                i=1;
                 break; 
             }
             
+        } 
+        if(i==0)
+        {
+            cout<<"invalid credentials.";
+            signin();
         }
-        myfile.close();
-    } else {
-        cout << "Unable to open file." << endl;
-    }
+    
 
                 
 
