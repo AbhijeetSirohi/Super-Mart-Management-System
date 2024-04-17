@@ -49,6 +49,12 @@ public:
      string brand;
 
 
+// Constructor
+    product(int id, const std::string& name, int quantity, float sell_price, float cost, int sold, const std::string& brand_name) 
+        : product_id(id), product_name(name), stock_quantity(quantity), selling_price(sell_price), 
+          cost_price(cost), items_sold(sold), brand(brand_name) {
+    }
+
 
 };
 
@@ -138,6 +144,8 @@ class inventory_staff:public staff{
 void inventory();
 
 };
+
+
     
     
     
