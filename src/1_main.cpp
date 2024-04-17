@@ -1,6 +1,7 @@
 #include <iostream>
 #include <limits> // for clearing input buffer
 #include <conio.h> // for _getch()
+#include <bits/stdc++.h>
 using namespace std;
 void blue()
 {
@@ -46,12 +47,12 @@ public:
             discount=10;
         }
      }
-      customer(const string& name, const string& mail, const string& passwd, const string& phone_no, float spent) :
+      customer(string name, string mail, string passwd,  string phone_no, float spent,int dis) :
         cust_name(name),
         cust_mail(mail),
         cust_passwd(passwd),
         cust_phone_no(phone_no),
-        discount(0.0), // Assuming discount starts at 0
+        discount(dis), 
         amount_spent(spent)
     {
         check_star_cust(); // Check if the customer qualifies for a star customer discount
@@ -69,12 +70,32 @@ void existing_users()
 
 void signin()
 {
-    customer c;
 
-    string pnum; //customer phone number
+    string pnum,pswd; //customer phone number
     cout<<"Enter your ID(Phone number): to SignIn:";
-    
-    //if(pnum==c.cust_phone_no)
+    cin>>pnum;
+    cout<<"Enter your password: to SignIn:";
+    cin>>pswd;
+ifstream myfile("cust_file.txt");
+   if (myfile.is_open()) { // Check if the file is open
+        string first_name, email, phone_no, password ,last_name;
+        float amt_spent;
+        int discount;
+        while (myfile >> first_name >>last_name>>email >>phone_no >> password >> amt_spent >> discount) {
+            if ((phone_no == pnum)&&(password==pswd)) { 
+                first_name=first_name+" "+last_name;
+                cout<<first_name;
+                customer C(first_name, email, phone_no , password , amt_spent,discount);
+                break; 
+            }
+            
+        }
+        myfile.close();
+    } else {
+        cout << "Unable to open file." << endl;
+    }
+
+                
 
 }
 
@@ -83,15 +104,20 @@ void signup() //newuser
 {
     customer c;
     cout<<"Hi!Welcome to AGRAMART :)\nEnter your name: ";
-    cin>>c.cust_name;
      cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    getline(cin,c.cust_name);
     cout<<"Enter your Mail-ID: ";
     cin>>c.cust_mail;
-    cout<<"Enter Phone-num: ";
+    cout<<"Enter Phone-num:  ";
     cin>>c.cust_phone_no;
+    cout<<"Enter Password:";
+    cin>>c.cust_passwd;
     c.amount_spent=0;
+    c.discount=0;
+    ofstream myfile("cust_file.txt",ios::app);
 
-    
+          myfile<<c.cust_name<<" "<<c.cust_mail<<" "<<c.cust_phone_no<<" "<<c.cust_passwd<<" "<<c.amount_spent<<" "<<c.discount<<"\n";
+          myfile.close();
 }
 
 
@@ -154,7 +180,7 @@ int main() {
 
         switch (signInChoice) {
             case 1:
-                // Call your signin function here
+                signin();
                 signInValid = true;
                 break;
             case 2:
