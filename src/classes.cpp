@@ -202,7 +202,7 @@ staff(const string id, const string pswd, const std::string& name, const std::st
     {}
 
     // Getter functions
-    int get_staff_id() const {
+    string get_staff_id() const {
         return staff_id;
     }
 
