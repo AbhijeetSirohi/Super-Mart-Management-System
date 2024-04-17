@@ -2,6 +2,7 @@
 #include <limits> // for clearing input buffer
 #include <conio.h> // for _getch()
 #include <bits/stdc++.h>
+#include<fstream>
 using namespace std;
 void blue()
 {
@@ -89,15 +90,59 @@ public:
     }
 };
 
-/*
-customer* customerptr[100];
-static int i=5;
-void existing_users()
-{
-    o-customerptr[0]=
-}
-*/
+class staff{
+public:
+    string staff_id;
+    string staff_name;
+    string gender;
+    float salary;
+    string staff_phone_no;
+    string staff_mail;
+    string staff_type;
 
+
+staff(string id, const std::string& name, const std::string& gen, float sal, const std::string& phone_no, const std::string& mail, const std::string& type) :
+        staff_id(id),
+        staff_name(name),
+        gender(gen),
+        salary(sal),
+        staff_phone_no(phone_no),
+        staff_mail(mail),
+        staff_type(type)
+    {}
+};
+void signin_staff()
+{
+    string staff_id,staff_pswd;
+    cout<<"Enter your Staff ID to SignIn:";
+    cin>>staff_id;
+    cout<<"Enter your password: to SignIn:";
+    cin>>staff_pswd;
+    int i=0;
+ifstream myfile("staff_file.txt");
+
+     string id, first_name, email, phone_no, password ,last_name,type_staff,gender;
+     float salary;
+     while(myfile>>id>>first_name>>last_name>>email>>phone_no>>password>>type_staff>>salary>>gender)
+     {
+         if((staff_id==id)&& (staff_pswd==password))
+            {
+                first_name=first_name+ " "+last_name;
+                cout<<"Staff name is: "<<first_name;
+                cout<<"\nStaff ID is:"<<id;
+                cout<<"\nStaff Designation is: "<<type_staff<<endl;
+                staff s(id,first_name,gender,salary,phone_no,email,type_staff);
+                i=1;
+                break;
+            }
+     }
+        if(i==0)
+        {
+            cout<<"invalid credentials.";
+            signin_staff();
+        }
+
+}
 void signin()
 {
 
@@ -106,8 +151,8 @@ void signin()
     cin>>pnum;
     cout<<"Enter your password: to SignIn:";
     cin>>pswd;
+    cin.ignore();
     int i=0;
-    
 ifstream myfile("cust_file.txt");
 
         string first_name, email, phone_no, password ,last_name;
@@ -196,6 +241,7 @@ int main() {
                 case 's':
                 case 'S':
                     validChoice = true;
+                    signin_staff();
                     break;
                 default:
                     cout << "Enter a letter from given choice(c/s):\n";
@@ -206,8 +252,5 @@ int main() {
 
     // Clear input buffer
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-    // Add staff login functionality here
-
     return 0;
 }
