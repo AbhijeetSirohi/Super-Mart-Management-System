@@ -31,6 +31,36 @@ void highlight()
 {
     cout<<"\033[0;41m";
 }
+void signin();
+void signup();
+void login_customer()
+{
+
+    int signInChoice;
+    bool signInValid = false;
+
+    while (!signInValid) {
+        cout << "\nPress 1 to Sign in\nPress 2 to Sign up\nChoice: ";
+        cin >> signInChoice;
+
+        switch (signInChoice) {
+            case 1:
+                signin();
+                signInValid = true;
+                break;
+            case 2:
+                signup();
+                signInValid = true;
+                signin();
+                break;
+            default:
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "Enter a number from given choice(1/2):\n";
+                break;
+        }
+    }
+}
 
 class customer{
 public:
@@ -52,7 +82,7 @@ public:
         cust_mail(mail),
         cust_passwd(passwd),
         cust_phone_no(phone_no),
-        discount(dis), 
+        discount(dis),
         amount_spent(spent)
     {
         check_star_cust(); // Check if the customer qualifies for a star customer discount
@@ -77,29 +107,30 @@ void signin()
     cout<<"Enter your password: to SignIn:";
     cin>>pswd;
     int i=0;
+    
 ifstream myfile("cust_file.txt");
-   
+
         string first_name, email, phone_no, password ,last_name;
         float amt_spent;
         int discount;
         while (myfile >> first_name >>last_name>>email >>phone_no >> password >> amt_spent >> discount) {
-            if ((phone_no == pnum)&&(password==pswd)) { 
+            if ((phone_no == pnum)&&(password==pswd)) {
                 first_name=first_name+" "+last_name;
                 cout<<first_name;
                 customer C(first_name, email, phone_no , password , amt_spent,discount);
                 i=1;
-                break; 
+                break;
             }
-            
-        } 
+
+        }
         if(i==0)
         {
             cout<<"invalid credentials.";
             signin();
         }
-    
 
-                
+
+
 
 }
 
@@ -160,6 +191,7 @@ int main() {
                 case 'c':
                 case 'C':
                     validChoice = true;
+                    login_customer();
                     break;
                 case 's':
                 case 'S':
@@ -174,30 +206,6 @@ int main() {
 
     // Clear input buffer
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-    int signInChoice;
-    bool signInValid = false;
-
-    while (!signInValid) {
-        cout << "\nPress 1 to Sign in\nPress 2 to Sign up\nChoice: ";
-        cin >> signInChoice;
-
-        switch (signInChoice) {
-            case 1:
-                signin();
-                signInValid = true;
-                break;
-            case 2:
-                signup();
-                signInValid = true;
-                break;
-            default:
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                cout << "Enter a number from given choice(1/2):\n";
-                break;
-        }
-    }
 
     // Add staff login functionality here
 
