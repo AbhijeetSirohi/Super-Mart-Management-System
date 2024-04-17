@@ -90,6 +90,8 @@ void signup() //newuser
     cout<<"Enter Phone-num: ";
     cin>>c.cust_phone_no;
     c.amount_spent=0;
+
+    
 }
 
 

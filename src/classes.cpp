@@ -29,6 +29,57 @@ public:
         check_star_cust(); // Check if the customer qualifies for a star customer discount
     }
 
+    // Getter functions
+    std::string get_cust_name() const {
+        return cust_name;
+    }
+
+    std::string get_cust_mail() const {
+        return cust_mail;
+    }
+
+    std::string get_cust_passwd() const {
+        return cust_passwd;
+    }
+
+    std::string get_cust_phone_no() const {
+        return cust_phone_no;
+    }
+
+    float get_discount() const {
+        return discount;
+    }
+
+    float get_amount_spent() const {
+        return amount_spent;
+    }
+
+    // Setter functions
+    void set_cust_name(const std::string& name) {
+        cust_name = name;
+    }
+
+    void set_cust_mail(const std::string& mail) {
+        cust_mail = mail;
+    }
+
+    void set_cust_passwd(const std::string& passwd) {
+        cust_passwd = passwd;
+    }
+
+    void set_cust_phone_no(const std::string& phone_no) {
+        cust_phone_no = phone_no;
+    }
+
+    void set_discount(float new_discount) {
+        discount = new_discount;
+    }
+
+    void set_amount_spent(float new_amount_spent) {
+        amount_spent = new_amount_spent;
+        check_star_cust(); // Recalculate discount if amount spent is changed
+    }
+
 };
 
 
