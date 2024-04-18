@@ -34,6 +34,8 @@ void highlight()
 }
 void signin();
 void signup();
+void displaySecondpage();
+void category(){};
 void login_customer()
 {
 
@@ -41,7 +43,7 @@ void login_customer()
     bool signInValid = false;
 
     while (!signInValid) {
-        cout << "\nPress 1 to Sign in\nPress 2 to Sign up\nChoice: ";
+        cout << "\nPress 1 to Sign in\nPress 2 to Sign up\nPress 3 to go back\nChoice: ";
         cin >> signInChoice;
 
         switch (signInChoice) {
@@ -54,6 +56,9 @@ void login_customer()
                 signInValid = true;
                 signin();
                 break;
+            case 3:
+            displaySecondpage();
+            break;
             default:
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -95,10 +100,12 @@ public:
     string staff_id;
     string staff_name;
     string gender;
+    string staff_pswd;
     float salary;
     string staff_phone_no;
     string staff_mail;
     string staff_type;
+    staff(){};
 
 
 staff(string id, const std::string& name, const std::string& gen, float sal, const std::string& phone_no, const std::string& mail, const std::string& type) :
@@ -111,37 +118,63 @@ staff(string id, const std::string& name, const std::string& gen, float sal, con
         staff_type(type)
     {}
 };
-void signin_staff()
-{
-    string staff_id,staff_pswd;
-    cout<<"Enter your Staff ID to SignIn:";
-    cin>>staff_id;
-    cout<<"Enter your password: to SignIn:";
-    cin>>staff_pswd;
-    int i=0;
-ifstream myfile("staff_file.txt");
+void signin_staff() {
+    string staff_id, staff_pass;
+    cout << "Enter your Staff ID to SignIn:";
+    cin >> staff_id;
+    cout << "Enter your password to SignIn:";
+    cin >> staff_pass;
 
-     string id, first_name, email, phone_no, password ,last_name,type_staff,gender;
-     float salary;
-     while(myfile>>id>>first_name>>last_name>>email>>phone_no>>password>>type_staff>>salary>>gender)
-     {
-         if((staff_id==id)&& (staff_pswd==password))
-            {
-                first_name=first_name+ " "+last_name;
-                cout<<"Staff name is: "<<first_name;
-                cout<<"\nStaff ID is:"<<id;
-                cout<<"\nStaff Designation is: "<<type_staff<<endl;
-                staff s(id,first_name,gender,salary,phone_no,email,type_staff);
-                i=1;
-                break;
-            }
-     }
-        if(i==0)
-        {
-            cout<<"invalid credentials.";
-            signin_staff();
+    ifstream myfile("staff_file.txt");
+    if (!myfile) {
+        cout << "Error: Unable to open file." << endl;
+        return;
+    }
+
+    string id, first_name, email, phone_no, password, last_name, type_staff, gender;
+    float salary;
+    bool found = false;
+
+    while (myfile >> id >> first_name >> last_name >> email >> phone_no >> password >> type_staff >> salary >> gender) {cout<<id;
+        if (staff_id == id && staff_pass == password) {
+            first_name = first_name + " " + last_name;
+            cout << "Staff name is: " << first_name << endl;
+            cout << "Staff ID is: " << id << endl;
+            cout << "Staff Designation is: " << type_staff << endl;
+            found = true;
+            break;
         }
+    }
+    myfile.close();
 
+    if (!found) {
+        cout << "Invalid credentials." << endl;
+    }
+}
+void signup_staff() //newuser
+{
+    staff s;
+    cout<<"Enter employee name: ";
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    getline(cin,s.staff_name);
+    cout<<"Enter employee ID:";
+    cin>>s.staff_id;
+    cout<<"Enter employee Mail-ID: ";
+    cin>>s.staff_mail;
+    cout<<"Enter employee Phone-num:  ";
+    cin>>s.staff_phone_no;
+    cout<<"Enter employee Password:";
+    cin>>s.staff_pswd;
+    cout<<"Enter employee salary:";
+    cin>>s.salary;
+    cout<<"Enter employee type:";
+    cin>>s.staff_type;
+    cout<<"Enter employee gender:";
+    cin>>s.gender;
+    ofstream myfile("staff_file.txt",ios::app);
+
+          myfile<<s.staff_id<<" "<<s.staff_name<<" "<<s.staff_mail<<" "<<s.staff_phone_no<<" "<<s.staff_pswd<<" "<<s.staff_type<<" "<<s.salary<<" "<<s.gender<<"\n";
+          myfile.close();
 }
 void signin()
 {
@@ -161,9 +194,10 @@ ifstream myfile("cust_file.txt");
         while (myfile >> first_name >>last_name>>email >>phone_no >> password >> amt_spent >> discount) {
             if ((phone_no == pnum)&&(password==pswd)) {
                 first_name=first_name+" "+last_name;
-                cout<<first_name;
+                cout<<"Welcome "<<first_name<<"to the supermart."<<endl<<"What do you want to buy today?";
                 customer C(first_name, email, phone_no , password , amt_spent,discount);
                 i=1;
+                category();
                 break;
             }
 
@@ -213,16 +247,10 @@ void displayFrontPage() {
 void displayLoginPage() {
     system("cls"); // Clear the console screen
 }
-
-int main() {
-    char choice;
-    displayFrontPage();
-    _getch(); // Wait for a key press
-    displayLoginPage();
+void displaySecondpage(){
     char loginChoice;
     bool validChoice = false;
-
-    while (!validChoice) {
+while (!validChoice) {
         cout << "\nEnter c for Customer Login page\nEnter s for Staff Login Page\nChoice: ";
         cin >> loginChoice;
         // Check if the input is not alphabetic
@@ -249,6 +277,13 @@ int main() {
             }
         }
     }
+ }
+int main() {
+    char choice;
+    displayFrontPage();
+    _getch(); // Wait for a key press
+    displayLoginPage();
+    displaySecondpage();
 
     // Clear input buffer
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
