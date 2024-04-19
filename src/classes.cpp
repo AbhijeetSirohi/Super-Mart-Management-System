@@ -140,10 +140,18 @@ class clothes:public product{
 public:
     string gender;
     string csize;
-   
-    string colour;
-    
+   string colour;
+
+
+   clothes(int id, const string& name, int quantity, float sell_price, float cost, int sold, const string& brand_name,
+            const string& gen, const string& siz, const string& col)
+        : product(id, name, quantity, sell_price, cost, sold, brand_name), gender(gen), csize(siz), colour(col) {}
+
+        
+ 
 };
+
+
 
 
 class food{
