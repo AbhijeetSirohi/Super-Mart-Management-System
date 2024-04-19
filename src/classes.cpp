@@ -189,7 +189,8 @@ class healthcare:public product{
 
 class staff{
     public:
-    int staff_id;
+    string staff_id;
+    string staff_pswd;
     string staff_name;
     string gender;
     float salary;
@@ -198,8 +199,8 @@ class staff{
    string staff_type;
 
 
-staff(int id, const std::string& name, const std::string& gen, float sal, const std::string& phone_no, const std::string& mail, const std::string& type) :
-        staff_id(id),
+staff(const string id, const string pswd, const std::string& name, const std::string& gen, float sal, const std::string& phone_no, const std::string& mail, const std::string& type) :
+        staff_id(id),staff_pswd(pswd),
         staff_name(name),
         gender(gen),
         salary(sal),
@@ -209,7 +210,7 @@ staff(int id, const std::string& name, const std::string& gen, float sal, const 
     {}
 
     // Getter functions
-    int get_staff_id() const {
+    string get_staff_id() const {
         return staff_id;
     }
 

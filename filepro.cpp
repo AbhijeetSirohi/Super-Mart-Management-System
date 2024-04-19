@@ -15,7 +15,7 @@ int main()
             ofstream myfile("try.txt",ios::app);
             string s;int age;
             cout<<"input";
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             getline(cin,s);
             cout<<"age";
             cin>>age;

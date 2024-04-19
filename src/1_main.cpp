@@ -2,6 +2,7 @@
 #include <limits> // for clearing input buffer
 #include <conio.h> // for _getch()
 #include <bits/stdc++.h>
+#include<fstream>
 using namespace std;
 void blue()
 {
@@ -31,6 +32,41 @@ void highlight()
 {
     cout<<"\033[0;41m";
 }
+void signin();
+void signup();
+void displaySecondpage();
+void category(){};
+void login_customer()
+{
+
+    int signInChoice;
+    bool signInValid = false;
+
+    while (!signInValid) {
+        cout << "\nPress 1 to Sign in\nPress 2 to Sign up\nPress 3 to go back\nChoice: ";
+        cin >> signInChoice;
+
+        switch (signInChoice) {
+            case 1:
+                signin();
+                signInValid = true;
+                break;
+            case 2:
+                signup();
+                signInValid = true;
+                signin();
+                break;
+            case 3:
+            displaySecondpage();
+            break;
+            default:
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "Enter a number from given choice(1/2):\n";
+                break;
+        }
+    }
+}
 
 class customer{
 public:
@@ -52,22 +88,94 @@ public:
         cust_mail(mail),
         cust_passwd(passwd),
         cust_phone_no(phone_no),
-        discount(dis), 
+        discount(dis),
         amount_spent(spent)
     {
         check_star_cust(); // Check if the customer qualifies for a star customer discount
     }
 };
 
-/*
-customer* customerptr[100];
-static int i=5;
-void existing_users()
-{
-    o-customerptr[0]=
-}
-*/
+class staff{
+public:
+    string staff_id;
+    string staff_name;
+    string gender;
+    string staff_pswd;
+    float salary;
+    string staff_phone_no;
+    string staff_mail;
+    string staff_type;
+    staff(){};
 
+
+staff(string id, const std::string& name, const std::string& gen, float sal, const std::string& phone_no, const std::string& mail, const std::string& type) :
+        staff_id(id),
+        staff_name(name),
+        gender(gen),
+        salary(sal),
+        staff_phone_no(phone_no),
+        staff_mail(mail),
+        staff_type(type)
+    {}
+};
+void signin_staff() {
+    string staff_id, staff_pass;
+    cout << "Enter your Staff ID to SignIn:";
+    cin >> staff_id;
+    cout << "Enter your password to SignIn:";
+    cin >> staff_pass;
+
+    ifstream myfile("staff_file.txt");
+    if (!myfile) {
+        cout << "Error: Unable to open file." << endl;
+        return;
+    }
+
+    string id, first_name, email, phone_no, password, last_name, type_staff, gender;
+    float salary;
+    bool found = false;
+
+    while (myfile >> id >> first_name >> last_name >> email >> phone_no >> password >> type_staff >> salary >> gender) {cout<<id;
+        if (staff_id == id && staff_pass == password) {
+            first_name = first_name + " " + last_name;
+            cout << "Staff name is: " << first_name << endl;
+            cout << "Staff ID is: " << id << endl;
+            cout << "Staff Designation is: " << type_staff << endl;
+            found = true;
+            break;
+        }
+    }
+    myfile.close();
+
+    if (!found) {
+        cout << "Invalid credentials." << endl;
+    }
+}
+void signup_staff() //newuser
+{
+    staff s;
+    cout<<"Enter employee name: ";
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    getline(cin,s.staff_name);
+    cout<<"Enter employee ID:";
+    cin>>s.staff_id;
+    cout<<"Enter employee Mail-ID: ";
+    cin>>s.staff_mail;
+    cout<<"Enter employee Phone-num:  ";
+    cin>>s.staff_phone_no;
+    cout<<"Enter employee Password:";
+    cin>>s.staff_pswd;
+    cout<<"Enter employee salary:";
+    cin>>s.salary;
+    cout<<"Enter employee type:";
+    cin>>s.staff_type;
+    cout<<"Enter employee gender:";
+    cin>>s.gender;
+    ofstream myfile("staff_file.txt",ios::app);
+
+          myfile<<s.staff_id<<" "<<s.staff_name<<" "<<s.staff_mail<<" "<<s.staff_phone_no<<" "<<s.staff_pswd<<" "<<s.staff_type<<" "<<s.salary<<" "<<s.gender<<"\n";
+          myfile.close();
+}
 void signin()
 {
 
@@ -76,26 +184,32 @@ void signin()
     cin>>pnum;
     cout<<"Enter your password: to SignIn:";
     cin>>pswd;
+    cin.ignore();
+    int i=0;
 ifstream myfile("cust_file.txt");
-   if (myfile.is_open()) { // Check if the file is open
+
         string first_name, email, phone_no, password ,last_name;
         float amt_spent;
         int discount;
         while (myfile >> first_name >>last_name>>email >>phone_no >> password >> amt_spent >> discount) {
-            if ((phone_no == pnum)&&(password==pswd)) { 
+            if ((phone_no == pnum)&&(password==pswd)) {
                 first_name=first_name+" "+last_name;
-                cout<<first_name;
+                cout<<"Welcome "<<first_name<<"to the supermart."<<endl<<"What do you want to buy today?";
                 customer C(first_name, email, phone_no , password , amt_spent,discount);
-                break; 
+                i=1;
+                category();
+                break;
             }
-            
-        }
-        myfile.close();
-    } else {
-        cout << "Unable to open file." << endl;
-    }
 
-                
+        }
+        if(i==0)
+        {
+            cout<<"invalid credentials.";
+            signin();
+        }
+
+
+
 
 }
 
@@ -133,16 +247,10 @@ void displayFrontPage() {
 void displayLoginPage() {
     system("cls"); // Clear the console screen
 }
-
-int main() {
-    char choice;
-    displayFrontPage();
-    _getch(); // Wait for a key press
-    displayLoginPage();
+void displaySecondpage(){
     char loginChoice;
     bool validChoice = false;
-
-    while (!validChoice) {
+while (!validChoice) {
         cout << "\nEnter c for Customer Login page\nEnter s for Staff Login Page\nChoice: ";
         cin >> loginChoice;
         // Check if the input is not alphabetic
@@ -156,10 +264,12 @@ int main() {
                 case 'c':
                 case 'C':
                     validChoice = true;
+                    login_customer();
                     break;
                 case 's':
                 case 'S':
                     validChoice = true;
+                    signin_staff();
                     break;
                 default:
                     cout << "Enter a letter from given choice(c/s):\n";
@@ -167,35 +277,15 @@ int main() {
             }
         }
     }
+ }
+int main() {
+    char choice;
+    displayFrontPage();
+    _getch(); // Wait for a key press
+    displayLoginPage();
+    displaySecondpage();
 
     // Clear input buffer
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-    int signInChoice;
-    bool signInValid = false;
-
-    while (!signInValid) {
-        cout << "\nPress 1 to Sign in\nPress 2 to Sign up\nChoice: ";
-        cin >> signInChoice;
-
-        switch (signInChoice) {
-            case 1:
-                signin();
-                signInValid = true;
-                break;
-            case 2:
-                signup();
-                signInValid = true;
-                break;
-            default:
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                cout << "Enter a number from given choice(1/2):\n";
-                break;
-        }
-    }
-
-    // Add staff login functionality here
-
     return 0;
 }
