@@ -1,0 +1,10 @@
+501 Chips 50 HaldiRam Snacks 80
+502 Coldrink 80 CocaCola Drinkable 80
+503 Flour 120 Aashirwaad Eatable 50
+504 Biscuits 35 JimJam Snacks 80
+505 Ladoo 300 Bikaner SweetDish 50
+506 Maggie 56 Nestle Noodles 80    
+507 Rice 100 Daawat Eatable 50
+508 Pulses 89 Rajdhani Eatable 50
+509 Almonds 750 Nutraj DryFruits 30
+510 Ghee 500 Patanjali Eatable 30
