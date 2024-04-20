@@ -36,6 +36,8 @@ void signin();
 void signup();
 void displaySecondpage();
 void category(){};
+void signup_staff();
+
 void login_customer()
 {
 
@@ -108,16 +110,121 @@ public:
     staff(){};
 
 
-staff(string id, const std::string& name, const std::string& gen, float sal, const std::string& phone_no, const std::string& mail, const std::string& type) :
+staff(string id,string pass, const std::string& name, const std::string& gen, float sal, const std::string& phone_no, const std::string& mail, const std::string& type) :
         staff_id(id),
         staff_name(name),
         gender(gen),
         salary(sal),
         staff_phone_no(phone_no),
         staff_mail(mail),
-        staff_type(type)
+        staff_type(type),
+        staff_pswd(pass)
     {}
 };
+int MANAGER(staff& s)
+{
+    cout<<"hi "<<s.staff_name<<endl<<"How can i help you today?";
+    cout<<endl<<"press 1 for employee details";
+    cout<<endl<<"press 2 to add new employee";
+    cout<<endl<<"press 3 to delete an employee";
+    cout<<endl<<"press 4 to go back";
+    int choice;
+    cout<<endl<<"choice";
+    cin>>choice;
+    if(choice==1)
+    {
+    string id, first_name, email, phone_no, password, last_name, type_staff, gender;
+    float salary;
+    ifstream myfile("staff_file.txt");
+     if (!myfile.is_open()) {
+        perror("file");
+        
+    }
+
+    
+    while (myfile >> id >> first_name >> last_name >> email >> phone_no >> password >> type_staff >> salary >> gender) {
+
+        string full_name = first_name + " " + last_name;
+
+       
+        cout << "Staff name: " << full_name << endl;
+        cout << "Staff ID: " << id << endl;
+        cout << "Email: " << email << endl;
+        cout << "Phone number: " << phone_no << endl;
+        cout << "Password: " << password << endl;
+        cout << "Staff type: " << type_staff << endl;
+        cout << "Salary: " << salary << endl;
+        cout << "Gender: " << gender << endl;
+        cout << endl;
+    }
+
+    myfile.close();
+    }
+    
+    else if(choice==2)
+    {
+        signup_staff();
+    }
+    else if(choice==3)
+    {
+        ifstream myfile("staff_file.txt");
+    vector<staff> staffList;
+
+    if (!myfile.is_open()) {
+        cout << "Error: Unable to open file " << endl;
+       
+    }
+
+    staff s;
+    string first_name,last_name;
+    while (myfile >> s.staff_id >> first_name >> last_name >> s.staff_mail >> s.staff_phone_no >> s.staff_pswd >> s.staff_type >> s.salary >> s.gender) {
+        s.staff_name=first_name+" "+last_name;
+        staffList.push_back(s);
+    }
+
+    myfile.close();
+    bool found = false;
+    cout<<"enter id";
+    string staffId;
+    cin>>staffId;
+    for (auto it = staffList.begin(); it != staffList.end(); ++it) {
+        if (it->staff_id==staffId) {
+            // Remove the staff member from the list
+            staffList.erase(it);
+            found = true;
+            break;
+        }
+    }if (!found) {
+        cout << "Staff with ID " << staffId << " not found." << endl;
+        
+    }
+    ofstream myFile("staff_file.txt");
+
+    if (!myFile.is_open()) {
+        cout << "Error: Unable to open file  for writing." << endl;
+        if(found)
+        {
+            cout<<"deleted successfully";
+        }
+        
+    }
+
+    for (const auto& s : staffList) {
+        myFile<< s.staff_id << " " << s.staff_name<<  " " << s.staff_mail << " " << s.staff_phone_no << " " << s.staff_pswd << " " << s.staff_type << " " << s.salary << " " << s.gender << endl;
+    }
+    
+    myFile.close();
+}
+    else if(choice==4)
+    {
+        displaySecondpage();
+    }
+    else{cout<<"wrong choice";}
+    }
+    
+   
+    
+
 void signin_staff() {
     string staff_id, staff_pass;
     cout << "Enter your Staff ID to SignIn:";
@@ -142,7 +249,12 @@ void signin_staff() {
             cout << "Staff ID is: " << id << endl;
             cout << "Staff Designation is: " << type_staff << endl;
             found = true;
+            staff S(id, password,first_name,gender,salary,phone_no,email,type_staff);
+            if((type_staff=="manager")||(type_staff=="Manager"))
+            {myfile.close();
+                MANAGER(S);}
             break;
+
         }
     }
     myfile.close();
@@ -194,7 +306,7 @@ ifstream myfile("cust_file.txt");
         while (myfile >> first_name >>last_name>>email >>phone_no >> password >> amt_spent >> discount) {
             if ((phone_no == pnum)&&(password==pswd)) {
                 first_name=first_name+" "+last_name;
-                cout<<"Welcome "<<first_name<<"to the supermart."<<endl<<"What do you want to buy today?";
+                cout<<"Welcome "<<first_name<<" to the supermart."<<endl<<"What do you want to buy today?";
                 customer C(first_name, email, phone_no , password , amt_spent,discount);
                 i=1;
                 category();
