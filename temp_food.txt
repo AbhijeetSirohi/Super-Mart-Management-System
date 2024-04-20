@@ -1,4 +1,4 @@
-501 Chips 50 HaldiRam Snacks 69
+501 Chips 50 HaldiRam Snacks 80
 502 Coldrink 80 CocaCola Drinkable 80
 503 Flour 120 Aashirwaad Eatable 50
 504 Biscuits 35 JimJam Snacks 80
