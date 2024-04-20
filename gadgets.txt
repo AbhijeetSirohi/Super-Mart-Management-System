@@ -1,0 +1,5 @@
+1006 earphones 50 500 400 0 sony
+1007 speaker 40 600 400 0 jbl
+1008 laptop 30 15000 12000 0 lenovo
+1009 charger 30 300 250 0 samsung
+1010 trimmer 40 800 650 0 syska
