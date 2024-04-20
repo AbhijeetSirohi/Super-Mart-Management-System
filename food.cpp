@@ -209,17 +209,9 @@ void updateStockQuantity(const string& foodFilename, const string& billFilename)
 }
 
 int main() {
-    // Step 1: Customer buys food items and generates bill
     shopping();
-
-    // Step 2: Print the bill and get the total bill amount
     float totalBill = printBill("food_bill.txt");
-
-    // Step 3: Update stock quantity in food file
     updateStockQuantity("food.txt", "food_bill.txt");
-
-    // Step 4: Print the sum of total bill
     cout << "Sum of Total Bill: $" << totalBill << endl;
-
     return 0;
 }
