@@ -264,10 +264,13 @@ void updateStockQuantity(const string& clothesFilename, const string& billFilena
     clothesFile.close();
     billFile.close();
     tempFile.close();
-
+     if (remove(clothesFilename.c_str()) != 0) {
+    // Print an error message if removal fails
+    perror("Error removing existing file");
+}
     // Rename the temporary file to overwrite the original clothes file
     if (rename("temp1.txt", clothesFilename.c_str()) != 0) {
-        cerr << "Error: Unable to update stock quantities in the clothes file." << endl;
+       perror("Error renaming file");
     } else {
         cout << "Stock quantities updated successfully." << endl;
     }
