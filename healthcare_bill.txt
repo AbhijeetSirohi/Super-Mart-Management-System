@@ -1,2 +1,0 @@
-202	Thermometer	Apollo	DiagnosticTool	10	1990
-201	First-Aid-Kit	Apollo	First-Aid	10	2490
