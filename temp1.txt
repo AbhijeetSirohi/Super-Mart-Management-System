@@ -1,4 +1,4 @@
-1001 shirt 1050 puma male short blue 50
+1001 shirt 1050 puma male short blue 0
 1002 pant 1060 nike female large pink 40
 1003 top 900 adidas male medium white 25
 1004 cap 400 underarmour unisex medium black 45
