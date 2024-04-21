@@ -166,7 +166,7 @@ class food{
 class stationary:public product{
 public:
        
-
+/* hello*/
        
 
 };

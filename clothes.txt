@@ -1,0 +1,10 @@
+1001 Shirt 75 650 900 0 Arrow Male Medium Blue
+1002 Jeans 50 750 950 0 Levis Male Medium Black
+1003 Top 60 350 500 0 Parada Female Small white
+1004 Cap 45 450 600 0 Nike Unisex Medium Green
+1005 Jacket 30 1500 2500 0 Woodland Male Large Brown
+1006 Skirt 55 450 600 0 Westside Female Medium pink
+1007 Scarf 40 200 300 0 Zara Female Medium Black
+1008 Lower 50 750 1000 0 Adidas Unisex Medium Grey
+1009 Socks 40 120 180 0 Lee Unisex Small Black
+1010 Tie 49 230 300 20 Parx Male Large Blue

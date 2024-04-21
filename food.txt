@@ -1,0 +1,10 @@
+2001 Chips 100 35 40 0 Lays Snacks
+2002 Nachos 120 45 60 0 Bingo Snacks
+2003 Popcorn 80 8 10 0 ActII Snacks
+2004 Peanuts 75 15 20 0 Haldiram Snacks
+2005 Maggi 140 15 20 0 Nestle Noodles
+2006 Pizza 40 350 450 0 McCain Frozen_Snacks
+2007 Mago_Bar 50 15 20 0 Amul Ice_Cream
+2008 Mirinda 60 30 40 0 Pepsico Soft_drink
+2009 Nimbooz 30 20 25 10 7UP Soft_drink
+2010 Crisps 59 18 20 10 Kurkure Snacks

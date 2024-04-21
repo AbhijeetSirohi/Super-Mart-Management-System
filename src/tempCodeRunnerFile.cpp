@@ -1,1 +1,1 @@
-login_customer
+updateStockQuantityByManager
