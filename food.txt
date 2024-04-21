@@ -1,10 +1,11 @@
-501 Chips 50 HaldiRam Snacks 80
-502 Coldrink 80 CocaCola Drinkable 80
-503 Flour 120 Aashirwaad Eatable 50
-504 Biscuits 35 JimJam Snacks 80
-505 Ladoo 300 Bikaner SweetDish 50
-506 Maggie 56 Nestle Noodles 80    
-507 Rice 100 Daawat Eatable 50
-508 Pulses 89 Rajdhani Eatable 50
-509 Almonds 750 Nutraj DryFruits 30
-510 Ghee 500 Patanjali Eatable 30
+2001 Chips 100 35 40 0 Lays Snacks
+2002 Nachos 120 45 60 0 Bingo Snacks
+2003 Popcorn 80 8 10 0 ActII Snacks 
+2004 Peanuts 75 15 20 0 Haldiram Snacks
+2005 Maggi 140 15 20 0 Nestle Noodles
+2006 Pizza 40 350 450 0 McCain Frozen_Snacks
+2007 Mago_Bar 50 15 20 0 Amul Ice_Cream
+2008 Mirinda 60 30 40 0 Pepsico Soft_drink
+2009 Nimbooz 40 20 25 0 7UP Soft_drink
+2010 Crisps 50 18 20 0 Kurkure Snacks
+ 
