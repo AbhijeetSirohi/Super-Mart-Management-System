@@ -1,10 +1,1 @@
-3001 Earphones 50 400 500 0 Sony
-3002 Speaker 40 400 600 0 JBL
-3003 Laptop 30 120000 15000 0 Lenovo
-3004 Charger 30 250 300 0 Samsung
-3005 Trimmer 40 650 800 0 Syska
-3006 Smart_Phone 50 8000 10000 0 Apple
-3007 Watch 45 1500 2000 0 Sonata
-3008 Kettle 60 750 900 0 Syska
-3009 Pendrive 40 400 500 0 HP
-3010 Fitness_Trcker 50 2000 3000 0 Fitbit
+3001 Earphones 50 400 500 0 Sony 3002

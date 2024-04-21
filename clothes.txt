@@ -7,4 +7,4 @@
 1007 Scarf 40 200 300 0 Zara Female Medium Black
 1008 Lower 50 750 1000 0 Adidas Unisex Medium Grey
 1009 Socks 40 120 180 0 Lee Unisex Small Black
-1010 Tie 30 230 300 0 Parx Male Large Blue
+1010 Tie 49 230 300 20 Parx Male Large Blue

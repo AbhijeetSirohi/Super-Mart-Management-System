@@ -385,7 +385,8 @@ void updateStockQuantity1(const string& clothesFilename, const string& billFilen
 
     int productId, quantity;
     float totalPrice;
-    while (billFile >> productId >> quantity >> totalPrice) {
+    string pname;
+    while (billFile >> productId >>pname>> quantity >> totalPrice) {
         bool found = false;
         for (size_t i = 0; i < clothesList.size(); ++i) {
             if (clothesList[i].product_id == productId) {
@@ -457,7 +458,8 @@ void updateStockQuantity2(const string& foodFilename, const string& billFilename
 
     int productId, quantity;
     float totalPrice;
-    while (billFile >> productId >> quantity >> totalPrice) {
+    string pname;
+    while (billFile >> productId >> pname>>quantity >> totalPrice) {
         bool found = false;
         for (size_t i = 0; i < foodList.size(); ++i) {
             if (foodList[i].product_id == productId) {
@@ -526,8 +528,8 @@ void updateStockQuantity3(const string& gadgetsFilename, const string& billFilen
     }
 
     int productId, quantity;
-    float totalPrice;
-    while (billFile >> productId >> quantity >> totalPrice) {
+    float totalPrice;string pname;
+    while (billFile >> productId >>pname>> quantity >> totalPrice) {
         bool found = false;
         for (size_t i = 0; i < gadgetsList.size(); ++i) {
             if (gadgetsList[i].product_id == productId) {
@@ -596,8 +598,8 @@ void updateStockQuantity4(const string& healthcareFilename, const string& billFi
     }
 
     int productId, quantity;
-    float totalPrice;
-    while (billFile >> productId >> quantity >> totalPrice) {
+    float totalPrice;string pname;
+    while (billFile >> productId >>pname>> quantity >> totalPrice) {
         bool found = false;
         for (size_t i = 0; i < healthcareList.size(); ++i) {
             if (healthcareList[i].product_id == productId) {
@@ -666,8 +668,9 @@ void updateStockQuantity5(const string& stationaryFilename, const string& billFi
     }
 
     int productId, quantity;
-    float totalPrice;
-    while (billFile >> productId >> quantity >> totalPrice) {
+    float totalPrice;string pname;
+
+    while (billFile >> productId >>pname>> quantity >> totalPrice) {
         bool found = false;
         for (size_t i = 0; i < stationaryList.size(); ++i) {
             if (stationaryList[i].product_id == productId) {
@@ -976,7 +979,7 @@ cout << "Sum of Total Bill: $" << fixed << setprecision(2) << totalbill1+ totalb
 
 int main() {
     // Call the shopping function
-    shop();
-    return 0;
+  shop();
+return 0;
 }
 
