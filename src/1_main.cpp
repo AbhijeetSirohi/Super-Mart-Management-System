@@ -32,6 +32,7 @@ void highlight()
 {
     cout<<"\033[0;41m";
 }
+void signin_cust();
 void signin();
 void signup();
 void displaySecondpage();
@@ -1035,9 +1036,11 @@ ifstream myfile("cust_file.txt");
 
         }
         if(i==0)
-        {
-            cout<<"invalid credentials.";
-            signin();
+        {cout<<"Invalid credentials."<<endl;
+            if((phone_no == pnum)&&(password!=pswd)){
+            cout<<"Please enter the correct password."<<endl;}
+            signin_cust();
+        
         }
 
 
@@ -1076,6 +1079,27 @@ void signup() //newuser
           myfile.close();
 }
 
+void signin_cust() {
+    char choice;
+    cout << "Incorrect phone number or password. Try again? (Y/N): ";
+    cin >> choice;
+
+    switch (choice) {
+        case 'Y':
+        case 'y':
+            signin();
+            break;
+        case 'N':
+        case 'n':
+            cout << "Returning to main menu...\n";
+            displaySecondpage();
+            break;
+        default:
+            cout << "Invalid choice. Returning to main menu...\n";
+            displaySecondpage();
+            break;
+    }
+}
 
 void displayFrontPage() {
     system("cls"); // Clear the console screen
