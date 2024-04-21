@@ -71,6 +71,9 @@ public:
         cout << "Stock Quantity: " << stock_quantity << endl;
         cout << "-------------------------" << endl;
     }
+      float calculateProfit() const {
+        return (selling_price - cost_price) * items_sold;
+    }
 };
 
 void displayClothesFromFile(const string& filename) {
@@ -165,7 +168,16 @@ void addToBill(const Clothes& item, int quantity, ofstream& billFile) {
     billFile << quantity << '\t';
     billFile << fixed << setprecision(2) << totalPrice << endl;
 }
-
+void displayProfitForClothes(const vector<Clothes>& clothesList) {
+    cout << "Profit for Each Clothes Item:" << endl;
+    cout << "------------------------------" << endl;
+    for (const auto& clothes : clothesList) {
+        float profit = clothes.calculateProfit();
+        cout << "Product ID: " << clothes.product_id << endl;
+        cout << "Name: " << clothes.product_name << endl;
+        cout << "Profit: $" << fixed << setprecision(2) << profit << endl;
+        cout << "------------------------------" << endl;
+    }}
 //foood
 class Food {
 public:
@@ -196,7 +208,19 @@ public:
         cout << "Stock Quantity: " << stock_quantity << endl;
         cout << "-------------------------" << endl;
     }
-};
+    float calculateProfit() const {
+        return (selling_price - cost_price) * items_sold;
+}};
+void displayProfitForFood(const vector<Food>& foodList) {
+    cout << "Profit for Each Food Item:" << endl;
+    cout << "---------------------------" << endl;
+    for (const auto& food : foodList) {
+        float profit = food.calculateProfit();
+        cout << "Product ID: " << food.product_id << endl;
+        cout << "Name: " << food.product_name << endl;
+        cout << "Profit: $" << fixed << setprecision(2) << profit << endl;
+        cout << "---------------------------" << endl;
+    }}
 
 void displayFoodFromFile(const string& filename) {
     ifstream inFile(filename);
@@ -316,7 +340,20 @@ public:
         cout << "Stock Quantity: " << stock_quantity << endl;
         cout << "-------------------------" << endl;
     }
-};
+    float calculateProfit() const {
+        return (selling_price - cost_price) * items_sold;
+}};
+void displayProfitForGadgets(const vector<Gadget>& gadgetList) {
+    cout << "Profit for Each Gadget Item:" << endl;
+    cout << "------------------------------" << endl;
+    for (const auto& gadget : gadgetList) {
+        float profit = gadget.calculateProfit();
+        cout << "Product ID: " << gadget.product_id << endl;
+        cout << "Name: " << gadget.product_name << endl;
+        cout << "Profit: $" << fixed << setprecision(2) << profit << endl;
+        cout << "------------------------------" << endl;
+    }
+}
 
 void displayGadgetsFromFile(const string& filename) {
     ifstream inFile(filename);
@@ -438,8 +475,20 @@ public:
         cout << "Category: " << category << endl;
         cout << "Stock Quantity: " << stock_quantity << endl;
         cout << "-------------------------" << endl;
+    }float calculateProfit() const {
+        return (selling_price - cost_price) * items_sold;
+}};
+void displayProfitForHealthcare(const vector<Healthcare>& healthcareList) {
+    cout << "Profit for Each Healthcare Item:" << endl;
+    cout << "---------------------------------" << endl;
+    for (const auto& healthcare : healthcareList) {
+        float profit = healthcare.calculateProfit();
+        cout << "Product ID: " << healthcare.product_id << endl;
+        cout << "Name: " << healthcare.product_name << endl;
+        cout << "Profit: $" << fixed << setprecision(2) << profit << endl;
+        cout << "---------------------------------" << endl;
     }
-};
+}
 
 void displayHealthcareFromFile(const string& filename) {
     ifstream inFile(filename);
@@ -560,8 +609,20 @@ public:
         cout << "Brand: " << brand_name << endl;
         cout << "Stock Quantity: " << stock_quantity << endl;
         cout << "-------------------------" << endl;
+    }float calculateProfit() const {
+        return (selling_price - cost_price) * items_sold;
+}};
+void displayProfitForStationary(const vector<Stationary>& stationaryList) {
+    cout << "Profit for Each Stationary Item:" << endl;
+    cout << "----------------------------------" << endl;
+    for (const auto& stationary : stationaryList) {
+        float profit = stationary.calculateProfit();
+        cout << "Product ID: " << stationary.product_id << endl;
+        cout << "Name: " << stationary.product_name << endl;
+        cout << "Profit: $" << fixed << setprecision(2) << profit << endl;
+        cout << "----------------------------------" << endl;
     }
-};
+}
 
 void displayStationaryFromFile(const string& filename) {
     ifstream inFile(filename);
@@ -755,7 +816,10 @@ int MANAGER(staff& s)
     cout<<endl<<"press 1 for employee details";
     cout<<endl<<"press 2 to add new employee";
     cout<<endl<<"press 3 to delete an employee";
-    cout<<endl<<"press 4 to go back";
+    cout<<endl<<"press 4 update product quantity";
+    cout<<endl<<"press 5 to see profit";
+    cout<<endl<<"press 6 to go back";
+
     int choice;
     cout<<endl<<"choice";
     cin>>choice;
@@ -843,11 +907,11 @@ int MANAGER(staff& s)
 
     myFile.close();
 }
-    else if(choice==4)
+    else if(choice==6)
     {
         displaySecondpage();
     }
-    else if(choice==5)
+    else if(choice==4)
     {
    cout<<"You are in  update function";
    cout<<"1-clothes/n2-food/n3-gadgets/n4-helthcare/n5-stationary";
@@ -906,6 +970,46 @@ int MANAGER(staff& s)
         cout<<"wrong choice";
     }
     }
+    else if(choice==5)
+    {
+        cout<<"1-clothes/n2-food/n3-gadgets/n4-helthcare/n5-stationary";
+   int c;
+   cin>>c;
+   if(c==1){
+   vector<Clothes> clothesList = readClothesFromFile("C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\clothes.txt");
+
+    
+    displayProfitForClothes(clothesList);
+    }
+    else if(c==2)
+    {
+       vector<Food> foodList = readFoodFromFile("C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\food.txt");
+
+    // Display profit for each food item
+    displayProfitForFood(foodList);
+    }
+    else if(c==3)
+    {
+       vector<Gadget> gadgetList = readGadgetsFromFile("C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\gadgets.txt");
+
+    displayProfitForGadgets(gadgetList);
+    }
+    else if(c==4)
+    {
+        vector<Healthcare> healthcareList = readHealthcareFromFile("C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\healthcare.txt");
+
+    displayProfitForHealthcare(healthcareList);
+    }
+    else if(c==5)
+    {
+       vector<Stationary> stationaryList = readStationaryFromFile("C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\stationary.txt");
+
+    
+    displayProfitForStationary(stationaryList);
+    }
+    else{
+        cout<<"wrong choice";
+    }}
     else{cout<<"wrong choice";}
 return 0;
 }
