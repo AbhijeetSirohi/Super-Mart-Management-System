@@ -16,7 +16,7 @@ public:
     int items_sold;
     string brand_name;
     string gender;
-    string size;
+    string sizee;
     string color;
 
     // Default constructor
@@ -27,21 +27,21 @@ public:
             const string& col)
         : product_id(id), product_name(name), stock_quantity(stock_qty),
           cost_price(cost), selling_price(price), items_sold(sold), brand_name(brand),
-          gender(gen), size(siz), color(col) {}
+          gender(gen), sizee(siz), color(col) {}
 
-    void displayProductInfo() const {
-        cout << "Product ID: " << product_id << endl;
-        cout << "Name: " << product_name << endl;
-        cout << "Price: $" << fixed << setprecision(2) << selling_price << endl;
-        cout << "Brand: " << brand_name << endl;
-        cout << "Size: " << size << ", Gender: " << gender << endl;
-        cout << "Color: " << color << endl;
-        cout << "Stock Quantity: " << stock_quantity << endl;
-        cout << "-------------------------" << endl;
+    void displayProductInfo1() const {
+        std::cout << "Product ID: " << product_id << endl;
+        std::cout << "Name: " << product_name << endl;
+        std::cout << "Price: $" << fixed << setprecision(2) << selling_price << endl;
+        std::cout << "Brand: " << brand_name << endl;
+        std::cout << "Size: " << sizee << ", Gender: " << gender << endl;
+        std::cout << "Color: " << color << endl;
+        std::cout << "Stock Quantity: " << stock_quantity << endl;
+        std::cout << "-------------------------" << endl;
     }
 };
 
-void displayClothesFromFile(const string& filename) {
+void displayClothesFromFile1(const string& filename) {
     ifstream inFile(filename);
     if (!inFile) {
         cerr << "Error: Unable to open file " << filename << endl;
@@ -49,16 +49,16 @@ void displayClothesFromFile(const string& filename) {
     }
 
     Clothes item;
-    cout << "Available Clothes:" << endl;
+    std::cout << "Available Clothes:" << endl;
     while (inFile >> item.product_id >> item.product_name >> item.stock_quantity
                  >> item.cost_price >> item.selling_price >> item.items_sold
-                 >> item.brand_name >> item.gender >> item.size >> item.color) {
-        item.displayProductInfo();
+                 >> item.brand_name >> item.gender >> item.sizee >> item.color) {
+        item.displayProductInfo1();
     }
     inFile.close();
 }
 
-void addToBill(const Clothes& item, int quantity, ofstream& billFile) {
+void addToBill1(const Clothes& item, int quantity, ofstream& billFile) {
     float totalPrice = item.selling_price * quantity;
 
     billFile << item.product_id << '\t';
@@ -88,18 +88,18 @@ public:
           cost_price(cost), selling_price(price), items_sold(sold), brand_name(brand),
           category(cat) {}
 
-    void displayProductInfo() const {
-        cout << "Product ID: " << product_id << endl;
-        cout << "Name: " << product_name << endl;
-        cout << "Price: $" << fixed << setprecision(2) << selling_price << endl;
-        cout << "Brand: " << brand_name << endl;
-        cout << "Category: " << category << endl;
-        cout << "Stock Quantity: " << stock_quantity << endl;
-        cout << "-------------------------" << endl;
+    void displayProductInfo2() const {
+        std::cout << "Product ID: " << product_id << endl;
+        std::cout << "Name: " << product_name << endl;
+        std::cout << "Price: $" << fixed << setprecision(2) << selling_price << endl;
+        std::cout << "Brand: " << brand_name << endl;
+        std::cout << "Category: " << category << endl;
+        std::cout << "Stock Quantity: " << stock_quantity << endl;
+        std::cout << "-------------------------" << endl;
     }
 };
 
-void displayFoodFromFile(const string& filename) {
+void displayFoodFromFile2(const string& filename) {
     ifstream inFile(filename);
     if (!inFile) {
         cerr << "Error: Unable to open file " << filename << endl;
@@ -107,16 +107,16 @@ void displayFoodFromFile(const string& filename) {
     }
 
     Food item;
-    cout << "Available Food Items:" << endl;
+    std::cout << "Available Food Items:" << endl;
     while (inFile >> item.product_id >> item.product_name >> item.stock_quantity
                  >> item.cost_price >> item.selling_price >> item.items_sold
                  >> item.brand_name >> item.category) {
-        item.displayProductInfo();
+        item.displayProductInfo2();
     }
     inFile.close();
 }
 
-void addToBill(const Food& item, int quantity, ofstream& billFile) {
+void addToBill2(const Food& item, int quantity, ofstream& billFile) {
     float totalPrice = item.selling_price * quantity;
 
     billFile << item.product_id << '\t';
@@ -145,17 +145,17 @@ public:
         : product_id(id), product_name(name), stock_quantity(stock_qty),
           cost_price(cost), selling_price(price), items_sold(sold), brand_name(brand) {}
 
-    void displayProductInfo() const {
-        cout << "Product ID: " << product_id << endl;
-        cout << "Name: " << product_name << endl;
-        cout << "Price: $" << fixed << setprecision(2) << selling_price << endl;
-        cout << "Brand: " << brand_name << endl;
-        cout << "Stock Quantity: " << stock_quantity << endl;
-        cout << "-------------------------" << endl;
+    void displayProductInfo3() const {
+        std::cout << "Product ID: " << product_id << endl;
+        std::cout << "Name: " << product_name << endl;
+        std::cout << "Price: $" << fixed << setprecision(2) << selling_price << endl;
+        std::cout << "Brand: " << brand_name << endl;
+        std::cout << "Stock Quantity: " << stock_quantity << endl;
+        std::cout << "-------------------------" << endl;
     }
 };
 
-void displayGadgetsFromFile(const string& filename) {
+void displayGadgetsFromFile3(const string& filename) {
     ifstream inFile(filename);
     if (!inFile) {
         cerr << "Error: Unable to open file " << filename << endl;
@@ -163,16 +163,16 @@ void displayGadgetsFromFile(const string& filename) {
     }
 
     Gadget item;
-    cout << "Available Gadgets:" << endl;
+    std::cout << "Available Gadgets:" << endl;
     while (inFile >> item.product_id >> item.product_name >> item.stock_quantity
                  >> item.cost_price >> item.selling_price >> item.items_sold
                  >> item.brand_name) {
-        item.displayProductInfo();
+        item.displayProductInfo3();
     }
     inFile.close();
 }
 
-void addToBill(const Gadget& item, int quantity, ofstream& billFile) {
+void addToBill3(const Gadget& item, int quantity, ofstream& billFile) {
     float totalPrice = item.selling_price * quantity;
 
     billFile << item.product_id << '\t';
@@ -203,18 +203,18 @@ public:
           cost_price(cost), selling_price(price), items_sold(sold), brand_name(brand),
           category(cat) {}
 
-    void displayProductInfo() const {
-        cout << "Product ID: " << product_id << endl;
-        cout << "Name: " << product_name << endl;
-        cout << "Price: $" << fixed << setprecision(2) << selling_price << endl;
-        cout << "Brand: " << brand_name << endl;
-        cout << "Category: " << category << endl;
-        cout << "Stock Quantity: " << stock_quantity << endl;
-        cout << "-------------------------" << endl;
+    void displayProductInfo4() const {
+        std::cout << "Product ID: " << product_id << endl;
+        std::cout << "Name: " << product_name << endl;
+        std::cout << "Price: $" << fixed << setprecision(2) << selling_price << endl;
+        std::cout << "Brand: " << brand_name << endl;
+        std::cout << "Category: " << category << endl;
+        std::cout << "Stock Quantity: " << stock_quantity << endl;
+        std::cout << "-------------------------" << endl;
     }
 };
 
-void displayHealthcareFromFile(const string& filename) {
+void displayHealthcareFromFile4(const string& filename) {
     ifstream inFile(filename);
     if (!inFile) {
         cerr << "Error: Unable to open file " << filename << endl;
@@ -222,16 +222,16 @@ void displayHealthcareFromFile(const string& filename) {
     }
 
     Healthcare item;
-    cout << "Available Healthcare Products:" << endl;
+    std::cout << "Available Healthcare Products:" << endl;
     while (inFile >> item.product_id >> item.product_name >> item.stock_quantity
                  >> item.cost_price >> item.selling_price >> item.items_sold
                  >> item.brand_name >> item.category) {
-        item.displayProductInfo();
+        item.displayProductInfo4();
     }
     inFile.close();
 }
 
-void addToBill(const Healthcare& item, int quantity, ofstream& billFile) {
+void addToBill4(const Healthcare& item, int quantity, ofstream& billFile) {
     float totalPrice = item.selling_price * quantity;
 
     billFile << item.product_id << '\t';
@@ -260,17 +260,17 @@ public:
         : product_id(id), product_name(name), stock_quantity(stock_qty),
           cost_price(cost), selling_price(price), items_sold(sold), brand_name(brand) {}
 
-    void displayProductInfo() const {
-        cout << "Product ID: " << product_id << endl;
-        cout << "Name: " << product_name << endl;
-        cout << "Price: $" << fixed << setprecision(2) << selling_price << endl;
-        cout << "Brand: " << brand_name << endl;
-        cout << "Stock Quantity: " << stock_quantity << endl;
-        cout << "-------------------------" << endl;
+    void displayProductInfo5() const {
+        std::cout << "Product ID: " << product_id << endl;
+        std::cout << "Name: " << product_name << endl;
+        std::cout << "Price: $" << fixed << setprecision(2) << selling_price << endl;
+        std::cout << "Brand: " << brand_name << endl;
+        std::cout << "Stock Quantity: " << stock_quantity << endl;
+        std::cout << "-------------------------" << endl;
     }
 };
 
-void displayStationaryFromFile(const string& filename) {
+void displayStationaryFromFile5(const string& filename) {
     ifstream inFile(filename);
     if (!inFile) {
         cerr << "Error: Unable to open file " << filename << endl;
@@ -278,16 +278,16 @@ void displayStationaryFromFile(const string& filename) {
     }
 
     Stationary item;
-    cout << "Available Stationary Products:" << endl;
+    std::cout << "Available Stationary Products:" << endl;
     while (inFile >> item.product_id >> item.product_name >> item.stock_quantity
                  >> item.cost_price >> item.selling_price >> item.items_sold
                  >> item.brand_name) {
-        item.displayProductInfo();
+        item.displayProductInfo5();
     }
     inFile.close();
 }
 
-void addToBill(const Stationary& item, int quantity, ofstream& billFile) {
+void addToBill5(const Stationary& item, int quantity, ofstream& billFile) {
     float totalPrice = item.selling_price * quantity;
 
     billFile << item.product_id << '\t';
@@ -334,17 +334,17 @@ float printBill(const string& billFilename) {
     string productname;
     float totalBillAmount = 0.0;
 
-    cout << "Bill Details:" << endl;
+    std::cout << "Bill Details:" << endl;
     while (billFile >> productId >>productname>> quantity >> totalprice) {
         // Create a Bill object for the current item
         Bill item(productId, productname, totalprice, quantity);
 
         // Print details of the current item
-        cout << "Product ID: " << item.productId << endl;
-cout << "Name: " << item.productName << endl;
-cout << "Quantity: " << item.quantity << endl;
-cout << "Price: $" << fixed << setprecision(2) << totalprice  << endl;
-cout << "-------------------------" << endl;
+        std::cout << "Product ID: " << item.productId << endl;
+        std::cout << "Name: " << item.productName << endl;
+std::cout << "Quantity: " << item.quantity << endl;
+std::cout << "Price: $" << fixed << setprecision(2) << totalprice  << endl;
+std::cout << "-------------------------" << endl;
 
 
         // Calculate the total price for the current item and add to total bill amount
@@ -353,15 +353,15 @@ cout << "-------------------------" << endl;
     }
     billFile.close();
 
-    cout << "Total Bill Amount: $" << fixed << setprecision(2) << totalBillAmount << endl;
+    std::cout << "Total Bill Amount: $" << fixed << setprecision(2) << totalBillAmount << endl;
 
     return totalBillAmount;
 }
 
 // update function for clothes
-void updateStockQuantity(const string& clothesFilename, const string& billFilename) {
+void updateStockQuantity1(const string& clothesFilename, const string& billFilename) {
     ifstream clothesFile(clothesFilename);
-    ofstream tempFile("temp.txt");
+    ofstream tempFile("temp_clothes.txt");
 
     if (!clothesFile || !tempFile) {
         cerr << "Error: Unable to open file for reading or writing." << endl;
@@ -373,7 +373,7 @@ void updateStockQuantity(const string& clothesFilename, const string& billFilena
     // Read clothes data into a vector
     while (clothesFile >> item.product_id >> item.product_name >> item.stock_quantity
                         >> item.cost_price >> item.selling_price >> item.items_sold
-                        >> item.brand_name >> item.gender >> item.size >> item.color) {
+                        >> item.brand_name >> item.gender >> item.sizee >> item.color) {
         clothesList.push_back(item);
     }
 
@@ -408,7 +408,7 @@ void updateStockQuantity(const string& clothesFilename, const string& billFilena
                  << clothesList[i].stock_quantity << " " << clothesList[i].cost_price << " "
                  << clothesList[i].selling_price << " " << clothesList[i].items_sold << " "
                  << clothesList[i].brand_name << " " << clothesList[i].gender << " "
-                 << clothesList[i].size << " " << clothesList[i].color << endl;
+                 << clothesList[i].sizee << " " << clothesList[i].color << endl;
     }
 
     // Close the files
@@ -422,18 +422,18 @@ void updateStockQuantity(const string& clothesFilename, const string& billFilena
     }
 
     // Rename the temporary file to overwrite the original clothes file
-    if (rename("temp.txt", clothesFilename.c_str()) != 0) {
+    if (rename("temp_clothes.txt", clothesFilename.c_str()) != 0) {
         perror("Error renaming file");
     } else {
-        cout << "Stock quantities and items sold updated successfully." << endl;
+        std::cout << "Stock quantities and items sold updated successfully." << endl;
     }
 }
 
 // update function for food
 
-void updateStockQuantity(const string& foodFilename, const string& billFilename) {
+void updateStockQuantity2(const string& foodFilename, const string& billFilename) {
     ifstream foodFile(foodFilename);
-    ofstream tempFile("temp.txt");
+    ofstream tempFile("temp_food.txt");
 
     if (!foodFile || !tempFile) {
         cerr << "Error: Unable to open file for reading or writing." << endl;
@@ -493,17 +493,17 @@ void updateStockQuantity(const string& foodFilename, const string& billFilename)
     }
 
     // Rename the temporary file to overwrite the original food file
-    if (rename("temp.txt", foodFilename.c_str()) != 0) {
+    if (rename("temp_food.txt", foodFilename.c_str()) != 0) {
         perror("Error renaming file");
     } else {
-        cout << "Stock quantities and items sold updated successfully." << endl;
+        std::cout << "Stock quantities and items sold updated successfully." << endl;
     }
 }
 
 // update fucntion for gadgets
-void updateStockQuantity(const string& gadgetsFilename, const string& billFilename) {
+void updateStockQuantity3(const string& gadgetsFilename, const string& billFilename) {
     ifstream gadgetsFile(gadgetsFilename);
-    ofstream tempFile("temp.txt");
+    ofstream tempFile("temp_gadgets.txt");
 
     if (!gadgetsFile || !tempFile) {
         cerr << "Error: Unable to open file for reading or writing." << endl;
@@ -563,17 +563,17 @@ void updateStockQuantity(const string& gadgetsFilename, const string& billFilena
     }
 
     // Rename the temporary file to overwrite the original gadgets file
-    if (rename("temp.txt", gadgetsFilename.c_str()) != 0) {
+    if (rename("temp_gadgets.txt", gadgetsFilename.c_str()) != 0) {
         perror("Error renaming file");
     } else {
-        cout << "Stock quantities and items sold updated successfully." << endl;
+        std::cout << "Stock quantities and items sold updated successfully." << endl;
     }
 }
 
 // update function for healthcare
-void updateStockQuantity(const string& healthcareFilename, const string& billFilename) {
+void updateStockQuantity4(const string& healthcareFilename, const string& billFilename) {
     ifstream healthcareFile(healthcareFilename);
-    ofstream tempFile("temp.txt");
+    ofstream tempFile("temp_healthcare.txt");
 
     if (!healthcareFile || !tempFile) {
         cerr << "Error: Unable to open file for reading or writing." << endl;
@@ -633,17 +633,17 @@ void updateStockQuantity(const string& healthcareFilename, const string& billFil
     }
 
     // Rename the temporary file to overwrite the original healthcare file
-    if (rename("temp.txt", healthcareFilename.c_str()) != 0) {
+    if (rename("temp_healthcare.txt", healthcareFilename.c_str()) != 0) {
         perror("Error renaming file");
     } else {
-        cout << "Stock quantities and items sold updated successfully." << endl;
+        std::cout << "Stock quantities and items sold updated successfully." << endl;
     }
 }
 
 // update function for stationary
-void updateStockQuantity(const string& stationaryFilename, const string& billFilename) {
+void updateStockQuantity5(const string& stationaryFilename, const string& billFilename) {
     ifstream stationaryFile(stationaryFilename);
-    ofstream tempFile("temp.txt");
+    ofstream tempFile("temp_stationary.txt");
 
     if (!stationaryFile || !tempFile) {
         cerr << "Error: Unable to open file for reading or writing." << endl;
@@ -703,11 +703,280 @@ void updateStockQuantity(const string& stationaryFilename, const string& billFil
     }
 
     // Rename the temporary file to overwrite the original stationary file
-    if (rename("temp.txt", stationaryFilename.c_str()) != 0) {
+    if (rename("temp_stationary.txt", stationaryFilename.c_str()) != 0) {
         perror("Error renaming file");
     } else {
-        cout << "Stock quantities and items sold updated successfully." << endl;
+        std::cout << "Stock quantities and items sold updated successfully." << endl;
     }
 }
 
+
+
+void shop() {
+
+    float totalbill1=0,totalbill2=0,totalbill3=0,totalbill4=0,totalbill5=0;
+    string category;
+    float totalBillAmount = 0.0;
+
+    // Loop until the customer finishes shopping
+    while (true) {
+        cout << "Choose a category to shop from (clothes/food/gadgets/healthcare/stationary): ";
+        cin >> category;
+
+        if (category == "clothes") {
+    
+    cout << "Welcome to Clothes section. Here are the available products:" << endl;
+    displayClothesFromFile1("clothes.txt");
+
+    ifstream inFile("clothes.txt");
+    ofstream billFile("clothes_bill.txt", ios::app); // Append mode to add items to bill
+
+    char choice;
+    do {
+        int productId, quantity;
+        cout << "Enter the Product ID you want to purchase: ";
+        cin >> productId;
+        cout << "Enter the quantity: ";
+        cin >> quantity;
+
+        Clothes item1;
+        bool found = false;
+        while (inFile >> item1.product_id >> item1.product_name >> item1.stock_quantity>>item1.cost_price>>item1.selling_price>>
+                    item1.items_sold>> item1.brand_name >> item1.gender >> item1.sizee >> item1.color  ) {
+            if (item1.product_id == productId && item1.stock_quantity >= quantity) {
+                addToBill1(item1, quantity, billFile);
+
+                found = true;
+                // Update stock quantity in the clothes file (if needed)
+                // This would involve rewriting the entire file with updated quantities
+                // or using a temporary file to update quantities
+                break;
+            }
+        }
+
+        if (!found)
+            cout << "Product not found or insufficient stock." << endl;
+
+        cout << "Do you want to add another product? (y/n): ";
+        cin >> choice;
+    } while (choice == 'y' || choice == 'Y');
+
+    inFile.close();
+    billFile.close();
+
+     totalbill1 = printBill("clothes_bill.txt");
+}
+
+else if (category == "food") {
+
+    cout << "Welcome to Food section. Here are the available products:" << endl;
+    displayFoodFromFile2("food.txt");
+
+    ifstream inFile("food.txt");
+    ofstream billFile("food_bill.txt", ios::app); // Append mode to add items to bill
+
+    char choice;
+    do {
+        int productId, quantity;
+        cout << "Enter the Product ID you want to purchase: ";
+        cin >> productId;
+        cout << "Enter the quantity: ";
+        cin >> quantity;
+
+        Food item;
+        bool found = false;
+        while (inFile >> item.product_id >> item.product_name >> item.stock_quantity >> item.cost_price >> item.selling_price
+                    >> item.items_sold>>item.brand_name >> item.category) {
+            if (item.product_id == productId && item.stock_quantity >= quantity) {
+                addToBill2(item, quantity, billFile);
+
+                found = true;
+                break;
+            }
+        }
+
+        if (!found)
+            cout << "Product not found or insufficient stock." << endl;
+
+        cout << "Do you want to add another product? (y/n): ";
+        cin >> choice;
+    } while (choice == 'y' || choice == 'Y');
+
+    inFile.close();
+    billFile.close();
+
+     totalbill2 = printBill("food_bill.txt");
+}
+
+ else if (category == "gadgets") {
+
+    cout << "Welcome to Gadgets section. Here are the available products:" << endl;
+    displayGadgetsFromFile3("gadgets.txt");
+
+    ifstream inFile("gadgets.txt");
+    ofstream billFile("gadgets_bill.txt", ios::app); // Append mode to add items to bill
+
+    char choice;
+    do {
+        int productId, quantity;
+        cout << "Enter the Product ID you want to purchase: ";
+        cin >> productId;
+        cout << "Enter the quantity: ";
+        cin >> quantity;
+
+        Gadget item;
+        bool found = false;
+        while (inFile >> item.product_id >> item.product_name >> item.stock_quantity >> item.cost_price >> item.selling_price
+                    >> item.items_sold >> item.brand_name) {
+            if (item.product_id == productId && item.stock_quantity >= quantity) {
+                addToBill3(item, quantity, billFile);
+
+                found = true;
+                // Update stock quantity in the gadgets file (if needed)
+                // This would involve rewriting the entire file with updated quantities
+                // or using a temporary file to update quantities
+                break;
+            }
+        }
+
+        if (!found)
+            cout << "Product not found or insufficient stock." << endl;
+
+        cout << "Do you want to add another product? (y/n): ";
+        cin >> choice;
+    } while (choice == 'y' || choice == 'Y');
+
+    inFile.close();
+    billFile.close();
+
+     totalbill3= printBill("gadgets_bill.txt");
+}
+
+else if (category == "healthcare") {
+
+cout << "Welcome to Healthcare section. Here are the available products:" << endl;
+    displayHealthcareFromFile4("healthcare.txt");
+
+    ifstream inFile("healthcare.txt");
+    ofstream billFile("healthcare_bill.txt", ios::app); // Append mode to add items to bill
+
+    char choice;
+    do {
+        int productId, quantity;
+        cout << "Enter the Product ID you want to purchase: ";
+        cin >> productId;
+        cout << "Enter the quantity: ";
+        cin >> quantity;
+
+        Healthcare item;
+        bool found = false;
+        while (inFile >> item.product_id >> item.product_name >> item.stock_quantity >> item.cost_price >> item.selling_price
+                    >> item.items_sold >> item.brand_name >> item.category) {
+            if (item.product_id == productId && item.stock_quantity >= quantity) {
+                addToBill4(item, quantity, billFile);
+
+                found = true;
+                // Update stock quantity in the healthcare file (if needed)
+                // This would involve rewriting the entire file with updated quantities
+                // or using a temporary file to update quantities
+                break;
+            }
+        }
+
+        if (!found)
+            cout << "Product not found or insufficient stock." << endl;
+
+        cout << "Do you want to add another product? (y/n): ";
+        cin >> choice;
+    } while (choice == 'y' || choice == 'Y');
+
+    inFile.close();
+    billFile.close();
+
+     totalbill4 = printBill("healthcare_bill.txt");
+}
+
+else if (category == "stationary") {
+ cout << "Welcome to Stationary section. Here are the available products:" << endl;
+    displayStationaryFromFile5("stationary.txt");
+
+    ifstream inFile("stationary.txt");
+    ofstream billFile("stationary_bill.txt", ios::app); // Append mode to add items to bill
+
+    char choice;
+    do {
+        int productId, quantity;
+        cout << "Enter the Product ID you want to purchase: ";
+        cin >> productId;
+        cout << "Enter the quantity: ";
+        cin >> quantity;
+
+        Stationary item;
+        bool found = false;
+        while (inFile >> item.product_id >> item.product_name >> item.stock_quantity >> item.cost_price >> item.selling_price
+                    >> item.items_sold >> item.brand_name) {
+            if (item.product_id == productId && item.stock_quantity >= quantity) {
+                addToBill5(item, quantity, billFile);
+
+                found = true;
+                // Update stock quantity in the stationary file (if needed)
+                // This would involve rewriting the entire file with updated quantities
+                // or using a temporary file to update quantities
+                break;
+            }
+        }
+
+        if (!found)
+            cout << "Product not found or insufficient stock." << endl;
+
+        cout << "Do you want to add another product? (y/n): ";
+        cin >> choice;
+    } while (choice == 'y' || choice == 'Y');
+
+    inFile.close();
+    billFile.close();
+
+     totalbill5 = printBill("stationary_bill.txt");
+}
+
+ else {
+            cout << "Invalid category! Please choose again." << endl;
+            continue;
+        }
+
+        // Ask if the customer wants to shop more
+        char choice;
+        cout << "Do you want to shop more? (y/n): ";
+        cin >> choice;
+        if (choice != 'y' && choice != 'Y') {
+            break;
+        }
+    }
+
+  updateStockQuantity1("clothes.txt", "clothes_bill.txt");
+  updateStockQuantity2("food.txt", "food_bill.txt");
+  updateStockQuantity3("healthcare.txt", "healthcare_bill.txt");
+  updateStockQuantity4("gadgets.txt", "gadgets_bill.txt");
+  updateStockQuantity5("stationary.txt", "stationary_bill.txt");  
+
+
+cout << "Sum of Total Bill: $" << fixed << setprecision(2) << totalbill1+ totalbill2 + totalbill3 + totalbill4 + totalbill5<< endl;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+int main() {
+    // Call the shopping function
+    shop();
+    return 0;
+}
 

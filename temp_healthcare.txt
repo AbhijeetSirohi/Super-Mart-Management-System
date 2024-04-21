@@ -1,7 +1,0 @@
-201 First-Aid-Kit 249 Apollo First-Aid 40
-202 Thermometer 199 Apollo DiagnosticTool 65
-203 Sanitizers 89 Apollo Hygiene 80
-204 Gloves 49 Apollo PPE 35
-205 BPMachine 1200 Apollo Devices 15
-206 Protein 799 Apollo Supplements 10
-207 Syringes 69 Apollo Healthcare 25
