@@ -1,0 +1,10 @@
+5001 Pens 75 35 40 0 Cello_Writing
+5002 Ruler 50 15 20 0 Natraj
+5003 Notepad 60 50 60 0 WritoLine
+5004 Highlighters 30 120 145 0 Dom
+5005 Correction_Fluid 50 60 75 0 PaperMate
+5006 Envelopes 40 20 25 0 WritoLine
+5007 Pencils 100 10 12 0 Dom
+5008 Sharpner 70 5 8 0 Dom
+5009 Eraser 60 4 8 0 Dom
+5010 Scissors 50 55 70 0 Ikea
