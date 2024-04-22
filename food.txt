@@ -6,5 +6,10 @@
 2006 Pizza 40 350 450 0 McCain Frozen_Snacks
 2007 Mago_Bar 50 15 20 0 Amul Ice_Cream
 2008 Mirinda 60 30 40 0 Pepsico Soft_drink
+<<<<<<< HEAD
 2009 Nimbooz -135 20 25 175 7UP Soft_drink
 2010 Crisps 9 18 20 60 Kurkure Snacks
+=======
+2009 Nimbooz 20 20 25 20 7UP Soft_drink
+2010 Crisps 49 18 20 20 Kurkure Snacks
+>>>>>>> 02047445e267d54d27b1866f0f6994dde9b3f81b
