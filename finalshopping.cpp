@@ -731,11 +731,12 @@ void shop() {
     cout << "Welcome to Clothes section. Here are the available products:" << endl;
     displayClothesFromFile1("clothes.txt");
 
-    ifstream inFile("clothes.txt");
+    
     ofstream billFile("clothes_bill.txt", ios::app); // Append mode to add items to bill
 
     char choice;
     do {
+        ifstream inFile("clothes.txt");
         int productId, quantity;
         cout << "Enter the Product ID you want to purchase: ";
         cin >> productId;
@@ -745,7 +746,7 @@ void shop() {
         Clothes item1;
         bool found = false;
         while (inFile >> item1.product_id >> item1.product_name >> item1.stock_quantity>>item1.cost_price>>item1.selling_price>>
-                    item1.items_sold>> item1.brand_name >> item1.gender >> item1.sizee >> item1.color  ) {
+                    item1.items_sold>> item1.brand_name >> item1.gender >> item1.size >> item1.color  ) {
             if (item1.product_id == productId && item1.stock_quantity >= quantity) {
                 addToBill1(item1, quantity, billFile);
 
@@ -775,11 +776,12 @@ else if (category == "food") {
     cout << "Welcome to Food section. Here are the available products:" << endl;
     displayFoodFromFile2("food.txt");
 
-    ifstream inFile("food.txt");
+    
     ofstream billFile("food_bill.txt", ios::app); // Append mode to add items to bill
 
     char choice;
     do {
+        ifstream inFile("food.txt");
         int productId, quantity;
         cout << "Enter the Product ID you want to purchase: ";
         cin >> productId;
@@ -816,11 +818,12 @@ else if (category == "food") {
     cout << "Welcome to Gadgets section. Here are the available products:" << endl;
     displayGadgetsFromFile3("gadgets.txt");
 
-    ifstream inFile("gadgets.txt");
+    
     ofstream billFile("gadgets_bill.txt", ios::app); // Append mode to add items to bill
 
     char choice;
     do {
+        ifstream inFile("gadgets.txt");
         int productId, quantity;
         cout << "Enter the Product ID you want to purchase: ";
         cin >> productId;
@@ -860,11 +863,12 @@ else if (category == "healthcare") {
 cout << "Welcome to Healthcare section. Here are the available products:" << endl;
     displayHealthcareFromFile4("healthcare.txt");
 
-    ifstream inFile("healthcare.txt");
+    
     ofstream billFile("healthcare_bill.txt", ios::app); // Append mode to add items to bill
 
     char choice;
     do {
+        ifstream inFile("healthcare.txt");
         int productId, quantity;
         cout << "Enter the Product ID you want to purchase: ";
         cin >> productId;
@@ -903,11 +907,12 @@ else if (category == "stationary") {
  cout << "Welcome to Stationary section. Here are the available products:" << endl;
     displayStationaryFromFile5("stationary.txt");
 
-    ifstream inFile("stationary.txt");
+    
     ofstream billFile("stationary_bill.txt", ios::app); // Append mode to add items to bill
 
     char choice;
     do {
+        ifstream inFile("stationary.txt");
         int productId, quantity;
         cout << "Enter the Product ID you want to purchase: ";
         cin >> productId;
@@ -968,14 +973,6 @@ cout << "Sum of Total Bill: $" << fixed << setprecision(2) << totalbill1+ totalb
 
 
 }
-
-
-
-
-
-
-
-
 
 int main() {
     // Call the shopping function

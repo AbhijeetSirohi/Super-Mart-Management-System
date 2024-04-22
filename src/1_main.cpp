@@ -37,6 +37,72 @@ void signin();
 void signup();
 void displaySecondpage();
 void category(){};
+
+
+//here2
+
+//priting the bill
+// Define the Bill class
+class Bill {
+public:
+    int productId;
+    string productName;
+    float totalprice;
+    int quantity;
+
+    // Constructor
+    Bill(int id, const string& name, float price, int qty)
+        : productId(id), productName(name), totalprice(price), quantity(qty) {}
+
+    // Function to add item to bill
+    void addToBill(ofstream& billFile) const {
+        float totalPrice1 = totalprice;
+
+        billFile << "Product ID: " << productId << endl;
+        billFile << "Name: " << productName << endl;
+        billFile << "Quantity: " << quantity << endl;
+        billFile << "Price: $" << fixed << setprecision(2) << totalPrice1 << endl;
+        billFile << "-------------------------" << endl;
+    }
+};
+
+// Function to read bill from file and calculate total bill amount
+float printBill(const string& billFilename) {
+    ifstream billFile(billFilename);
+    if (!billFile) {
+        perror("Error: Unable to open bill file for reading.");
+        return 0.0;
+    }
+
+    int productId, quantity;
+    float totalprice ;
+    string productname;
+    float totalBillAmount = 0.0;
+
+    std::cout << "Bill Details:" << endl;
+    while (billFile >> productId >>productname>> quantity >> totalprice) {
+        // Create a Bill object for the current item
+        Bill item(productId, productname, totalprice, quantity);
+
+        // Print details of the current item
+        std::cout << "Product ID: " << item.productId << endl;
+        std::cout << "Name: " << item.productName << endl;
+std::cout << "Quantity: " << item.quantity << endl;
+std::cout << "Price: $" << fixed << setprecision(2) << totalprice  << endl;
+std::cout << "-------------------------" << endl;
+
+
+        // Calculate the total price for the current item and add to total bill amount
+        float totalPrice1 = totalprice;
+        totalBillAmount += totalPrice1;
+    }
+    billFile.close();
+
+    std::cout << "Total Bill Amount: $" << fixed << setprecision(2) << totalBillAmount << endl;
+
+    return totalBillAmount;
+}
+
 //here
  class Clothes {
 public:
@@ -160,7 +226,7 @@ void updateStockQuantityByManagerClothes(const string& filename, int productId, 
     cout << "Stock quantity for clothes with product ID " << productId << " updated to " << newQuantity << " successfully." << endl;
 }
 
-void addToBill(const Clothes& item, int quantity, ofstream& billFile) {
+void addToBill1(const Clothes& item, int quantity, ofstream& billFile) {
     float totalPrice = item.selling_price * quantity;
 
     billFile << item.product_id << '\t';
@@ -304,7 +370,7 @@ void updateStockQuantityForFood(const string& filename, int productId, int newQu
     cout << "Stock quantity for food with product ID " << productId << " updated to " << newQuantity << " successfully." << endl;
 }
 
-void addToBill(const Food& item, int quantity, ofstream& billFile) {
+void addToBill2(const Food& item, int quantity, ofstream& billFile) {
     float totalPrice = item.selling_price * quantity;
 
     billFile << item.product_id << '\t';
@@ -437,7 +503,7 @@ void updateStockQuantityForGadget(const string& filename, int productId, int new
     cout << "Stock quantity for gadget with product ID " << productId << " updated to " << newQuantity << " successfully." << endl;
 }
 
-void addToBill(const Gadget& item, int quantity, ofstream& billFile) {
+void addToBill3(const Gadget& item, int quantity, ofstream& billFile) {
     float totalPrice = item.selling_price * quantity;
 
     billFile << item.product_id << '\t';
@@ -574,7 +640,7 @@ void updateStockQuantityForHealthcare(const string& filename, int productId, int
     cout << "Stock quantity for healthcare product with product ID " << productId << " updated to " << newQuantity << " successfully." << endl;
 }
 
-void addToBill(const Healthcare& item, int quantity, ofstream& billFile) {
+void addToBill4(const Healthcare& item, int quantity, ofstream& billFile) {
     float totalPrice = item.selling_price * quantity;
 
     billFile << item.product_id << '\t';
@@ -706,7 +772,7 @@ void updateStockQuantityForStationary(const string& filename, int productId, int
     cout << "Stock quantity for stationary product with product ID " << productId << " updated to " << newQuantity << " successfully." << endl;
 }
 
-void addToBill(const Stationary& item, int quantity, ofstream& billFile) {
+void addToBill5(const Stationary& item, int quantity, ofstream& billFile) {
     float totalPrice = item.selling_price * quantity;
 
     billFile << item.product_id << '\t';
@@ -714,6 +780,628 @@ void addToBill(const Stationary& item, int quantity, ofstream& billFile) {
     billFile << quantity << '\t';
     billFile << fixed << setprecision(2) << totalPrice << endl;
 }
+//here3
+
+
+void updateStockQuantity1(const string& clothesFilename, const string& billFilename) {
+    ifstream clothesFile(clothesFilename);
+    ofstream tempFile("temp_clothes.txt");
+
+    if (!clothesFile || !tempFile) {
+        cerr << "Error: Unable to open file for reading or writing." << endl;
+        return;
+    }
+
+    vector<Clothes> clothesList;
+    Clothes item;
+    // Read clothes data into a vector
+    while (clothesFile >> item.product_id >> item.product_name >> item.stock_quantity
+                        >> item.cost_price >> item.selling_price >> item.items_sold
+                        >> item.brand_name >> item.gender >> item.size >> item.color) {
+        clothesList.push_back(item);
+    }
+
+    ifstream billFile(billFilename);
+    if (!billFile) {
+        perror("Error: Unable to open bill file for reading.");
+        return;
+    }
+
+    int productId, quantity;
+    float totalPrice;
+    string pname;
+    while (billFile >> productId >>pname>> quantity >> totalPrice) {
+        bool found = false;
+        for (size_t i = 0; i < clothesList.size(); ++i) {
+            if (clothesList[i].product_id == productId) {
+                // Update stock quantity
+                clothesList[i].stock_quantity -= quantity;
+                // Update items_sold
+                clothesList[i].items_sold += quantity;
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            cerr << "Product with ID " << productId << " not found in the clothes file." << endl;
+        }
+    }
+
+    // Write the updated clothes data to the temporary file
+    for (size_t i = 0; i < clothesList.size(); ++i) {
+        tempFile << clothesList[i].product_id << " " << clothesList[i].product_name << " "
+                 << clothesList[i].stock_quantity << " " << clothesList[i].cost_price << " "
+                 << clothesList[i].selling_price << " " << clothesList[i].items_sold << " "
+                 << clothesList[i].brand_name << " " << clothesList[i].gender << " "
+                 << clothesList[i].size << " " << clothesList[i].color << endl;
+    }
+
+    // Close the files
+    clothesFile.close();
+    billFile.close();
+    tempFile.close();
+
+    // Remove the original clothes file
+    if (remove(clothesFilename.c_str()) != 0) {
+        perror("Error removing existing file");
+    }
+
+    // Rename the temporary file to overwrite the original clothes file
+    if (rename("temp_clothes.txt", clothesFilename.c_str()) != 0) {
+        perror("Error renaming file");
+    } else {
+        std::cout << "Stock quantities and items sold updated successfully." << endl;
+    }
+}
+
+// update function for food
+
+void updateStockQuantity2(const string& foodFilename, const string& billFilename) {
+    ifstream foodFile(foodFilename);
+    ofstream tempFile("temp_food.txt");
+
+    if (!foodFile || !tempFile) {
+        cerr << "Error: Unable to open file for reading or writing." << endl;
+        return;
+    }
+
+    vector<Food> foodList;
+    Food item;
+    // Read food data into a vector
+    while (foodFile >> item.product_id >> item.product_name >> item.stock_quantity
+                     >> item.cost_price >> item.selling_price >> item.items_sold
+                     >> item.brand_name >> item.category) {
+        foodList.push_back(item);
+    }
+
+    ifstream billFile(billFilename);
+    if (!billFile) {
+        perror("Error: Unable to open bill file for reading.");
+        return;
+    }
+
+    int productId, quantity;
+    float totalPrice;
+    string pname;
+    while (billFile >> productId >> pname>>quantity >> totalPrice) {
+        bool found = false;
+        for (size_t i = 0; i < foodList.size(); ++i) {
+            if (foodList[i].product_id == productId) {
+                // Update stock quantity
+                foodList[i].stock_quantity -= quantity;
+                // Update items_sold
+                foodList[i].items_sold += quantity;
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            cerr << "Product with ID " << productId << " not found in the food file." << endl;
+        }
+    }
+
+    // Write the updated food data to the temporary file
+    for (size_t i = 0; i < foodList.size(); ++i) {
+        tempFile << foodList[i].product_id << " " << foodList[i].product_name << " "
+                 << foodList[i].stock_quantity << " " << foodList[i].cost_price << " "
+                 << foodList[i].selling_price << " " << foodList[i].items_sold << " "
+                 << foodList[i].brand_name << " " << foodList[i].category << endl;
+    }
+
+    // Close the files
+    foodFile.close();
+    billFile.close();
+    tempFile.close();
+
+    // Remove the original food file
+    if (remove(foodFilename.c_str()) != 0) {
+        perror("Error removing existing file");
+    }
+
+    // Rename the temporary file to overwrite the original food file
+    if (rename("temp_food.txt", foodFilename.c_str()) != 0) {
+        perror("Error renaming file");
+    } else {
+        std::cout << "Stock quantities and items sold updated successfully." << endl;
+    }
+}
+
+// update fucntion for gadgets
+void updateStockQuantity3(const string& gadgetsFilename, const string& billFilename) {
+    ifstream gadgetsFile(gadgetsFilename);
+    ofstream tempFile("temp_gadgets.txt");
+
+    if (!gadgetsFile || !tempFile) {
+        cerr << "Error: Unable to open file for reading or writing." << endl;
+        return;
+    }
+
+    vector<Gadget> gadgetsList;
+    Gadget item;
+    // Read gadgets data into a vector
+    while (gadgetsFile >> item.product_id >> item.product_name >> item.stock_quantity
+                       >> item.cost_price >> item.selling_price >> item.items_sold
+                       >> item.brand_name) {
+        gadgetsList.push_back(item);
+    }
+
+    ifstream billFile(billFilename);
+    if (!billFile) {
+        perror("Error: Unable to open bill file for reading.");
+        return;
+    }
+
+    int productId, quantity;
+    float totalPrice;string pname;
+    while (billFile >> productId >>pname>> quantity >> totalPrice) {
+        bool found = false;
+        for (size_t i = 0; i < gadgetsList.size(); ++i) {
+            if (gadgetsList[i].product_id == productId) {
+                // Update stock quantity
+                gadgetsList[i].stock_quantity -= quantity;
+                // Update items_sold
+                gadgetsList[i].items_sold += quantity;
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            cerr << "Product with ID " << productId << " not found in the gadgets file." << endl;
+        }
+    }
+
+    // Write the updated gadgets data to the temporary file
+    for (size_t i = 0; i < gadgetsList.size(); ++i) {
+        tempFile << gadgetsList[i].product_id << " " << gadgetsList[i].product_name << " "
+                 << gadgetsList[i].stock_quantity << " " << gadgetsList[i].cost_price << " "
+                 << gadgetsList[i].selling_price << " " << gadgetsList[i].items_sold << " "
+                 << gadgetsList[i].brand_name << endl;
+    }
+
+    // Close the files
+    gadgetsFile.close();
+    billFile.close();
+    tempFile.close();
+
+    // Remove the original gadgets file
+    if (remove(gadgetsFilename.c_str()) != 0) {
+        perror("Error removing existing file");
+    }
+
+    // Rename the temporary file to overwrite the original gadgets file
+    if (rename("temp_gadgets.txt", gadgetsFilename.c_str()) != 0) {
+        perror("Error renaming file");
+    } else {
+        std::cout << "Stock quantities and items sold updated successfully." << endl;
+    }
+}
+
+// update function for healthcare
+void updateStockQuantity4(const string& healthcareFilename, const string& billFilename) {
+    ifstream healthcareFile(healthcareFilename);
+    ofstream tempFile("temp_healthcare.txt");
+
+    if (!healthcareFile || !tempFile) {
+        cerr << "Error: Unable to open file for reading or writing." << endl;
+        return;
+    }
+
+    vector<Healthcare> healthcareList;
+    Healthcare item;
+    // Read healthcare data into a vector
+    while (healthcareFile >> item.product_id >> item.product_name >> item.stock_quantity
+                            >> item.cost_price >> item.selling_price >> item.items_sold
+                            >> item.brand_name >> item.category) {
+        healthcareList.push_back(item);
+    }
+
+    ifstream billFile(billFilename);
+    if (!billFile) {
+        perror("Error: Unable to open bill file for reading.");
+        return;
+    }
+
+    int productId, quantity;
+    float totalPrice;string pname;
+    while (billFile >> productId >>pname>> quantity >> totalPrice) {
+        bool found = false;
+        for (size_t i = 0; i < healthcareList.size(); ++i) {
+            if (healthcareList[i].product_id == productId) {
+                // Update stock quantity
+                healthcareList[i].stock_quantity -= quantity;
+                // Update items_sold
+                healthcareList[i].items_sold += quantity;
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            cerr << "Product with ID " << productId << " not found in the healthcare file." << endl;
+        }
+    }
+
+    // Write the updated healthcare data to the temporary file
+    for (size_t i = 0; i < healthcareList.size(); ++i) {
+        tempFile << healthcareList[i].product_id << " " << healthcareList[i].product_name << " "
+                 << healthcareList[i].stock_quantity << " " << healthcareList[i].cost_price << " "
+                 << healthcareList[i].selling_price << " " << healthcareList[i].items_sold << " "
+                 << healthcareList[i].brand_name << " " << healthcareList[i].category << endl;
+    }
+
+    // Close the files
+    healthcareFile.close();
+    billFile.close();
+    tempFile.close();
+
+    // Remove the original healthcare file
+    if (remove(healthcareFilename.c_str()) != 0) {
+        perror("Error removing existing file");
+    }
+
+    // Rename the temporary file to overwrite the original healthcare file
+    if (rename("temp_healthcare.txt", healthcareFilename.c_str()) != 0) {
+        perror("Error renaming file");
+    } else {
+        std::cout << "Stock quantities and items sold updated successfully." << endl;
+    }
+}
+
+// update function for stationary
+void updateStockQuantity5(const string& stationaryFilename, const string& billFilename) {
+    ifstream stationaryFile(stationaryFilename);
+    ofstream tempFile("temp_stationary.txt");
+
+    if (!stationaryFile || !tempFile) {
+        cerr << "Error: Unable to open file for reading or writing." << endl;
+        return;
+    }
+
+    vector<Stationary> stationaryList;
+    Stationary item;
+    // Read stationary data into a vector
+    while (stationaryFile >> item.product_id >> item.product_name >> item.stock_quantity
+                            >> item.cost_price >> item.selling_price >> item.items_sold
+                            >> item.brand_name) {
+        stationaryList.push_back(item);
+    }
+
+    ifstream billFile(billFilename);
+    if (!billFile) {
+        perror("Error: Unable to open bill file for reading.");
+        return;
+    }
+
+    int productId, quantity;
+    float totalPrice;string pname;
+
+    while (billFile >> productId >>pname>> quantity >> totalPrice) {
+        bool found = false;
+        for (size_t i = 0; i < stationaryList.size(); ++i) {
+            if (stationaryList[i].product_id == productId) {
+                // Update stock quantity
+                stationaryList[i].stock_quantity -= quantity;
+                // Update items_sold
+                stationaryList[i].items_sold += quantity;
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            cerr << "Product with ID " << productId << " not found in the stationary file." << endl;
+        }
+    }
+
+    // Write the updated stationary data to the temporary file
+    for (size_t i = 0; i < stationaryList.size(); ++i) {
+        tempFile << stationaryList[i].product_id << " " << stationaryList[i].product_name << " "
+                 << stationaryList[i].stock_quantity << " " << stationaryList[i].cost_price << " "
+                 << stationaryList[i].selling_price << " " << stationaryList[i].items_sold << " "
+                 << stationaryList[i].brand_name << endl;
+    }
+
+    // Close the files
+    stationaryFile.close();
+    billFile.close();
+    tempFile.close();
+
+    // Remove the original stationary file
+    if (remove(stationaryFilename.c_str()) != 0) {
+        perror("Error removing existing file");
+    }
+
+    // Rename the temporary file to overwrite the original stationary file
+    if (rename("temp_stationary.txt", stationaryFilename.c_str()) != 0) {
+        perror("Error renaming file");
+    } else {
+        std::cout << "Stock quantities and items sold updated successfully." << endl;
+    }
+}
+
+//shopping function
+void shop() {
+
+    float totalbill1=0,totalbill2=0,totalbill3=0,totalbill4=0,totalbill5=0;
+    string category;
+    float totalBillAmount = 0.0;
+
+    // Loop until the customer finishes shopping
+    while (true) {
+        cout << "Choose a category to shop from (clothes/food/gadgets/healthcare/stationary): ";
+        cin >> category;
+
+        if (category == "clothes") {
+    
+    cout << "Welcome to Clothes section. Here are the available products:" << endl;
+    displayClothesFromFile("C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\clothes.txt");
+
+    
+    ofstream billFile("C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\clothes_bill.txt", ios::app); // Append mode to add items to bill
+
+    char choice;
+    do {
+        ifstream inFile("C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\clothes.txt");
+        int productId, quantity;
+        cout << "Enter the Product ID you want to purchase: ";
+        cin >> productId;
+        cout << "Enter the quantity: ";
+        cin >> quantity;
+
+        Clothes item1;
+        bool found = false;
+        while (inFile >> item1.product_id >> item1.product_name >> item1.stock_quantity>>item1.cost_price>>item1.selling_price>>
+                    item1.items_sold>> item1.brand_name >> item1.gender >> item1.size >> item1.color  ) {
+            if (item1.product_id == productId && item1.stock_quantity >= quantity) {
+                addToBill1(item1, quantity, billFile);
+
+                found = true;
+                // Update stock quantity in the clothes file (if needed)
+                // This would involve rewriting the entire file with updated quantities
+                // or using a temporary file to update quantities
+                break;
+            }
+        }
+
+        if (!found)
+            cout << "Product not found or insufficient stock." << endl;
+
+        cout << "Do you want to add another product? (y/n): ";
+        cin >> choice;
+    inFile.close();
+    } while (choice == 'y' || choice == 'Y');
+
+    
+    billFile.close();
+
+     totalbill1 = printBill("C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\clothes_bill.txt");
+}
+
+else if (category == "food") {
+
+    cout << "Welcome to Food section. Here are the available products:" << endl;
+    displayFoodFromFile("C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\food.txt");
+
+    
+    ofstream billFile("C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\food_bill.txt", ios::app); // Append mode to add items to bill
+
+    char choice;
+    do {
+        ifstream inFile("C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\food.txt");
+        int productId, quantity;
+        cout << "Enter the Product ID you want to purchase: ";
+        cin >> productId;
+        cout << "Enter the quantity: ";
+        cin >> quantity;
+
+        Food item;
+        bool found = false;
+        while (inFile >> item.product_id >> item.product_name >> item.stock_quantity >> item.cost_price >> item.selling_price
+                    >> item.items_sold>>item.brand_name >> item.category) {
+            if (item.product_id == productId && item.stock_quantity >= quantity) {
+                addToBill2(item, quantity, billFile);
+
+                found = true;
+                break;
+            }
+        }
+
+        if (!found)
+            cout << "Product not found or insufficient stock." << endl;
+
+        cout << "Do you want to add another product? (y/n): ";
+        cin >> choice;
+   inFile.close();
+    } while (choice == 'y' || choice == 'Y');
+
+    
+    billFile.close();
+
+     totalbill2 = printBill("C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\food_bill.txt");
+}
+
+ else if (category == "gadgets") {
+
+    cout << "Welcome to Gadgets section. Here are the available products:" << endl;
+    displayGadgetsFromFile("C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\gadgets.txt");
+
+    
+    ofstream billFile("C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\gadgets_bill.txt", ios::app); // Append mode to add items to bill
+
+    char choice;
+    do {
+        ifstream inFile("C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\gadgets.txt");
+        int productId, quantity;
+        cout << "Enter the Product ID you want to purchase: ";
+        cin >> productId;
+        cout << "Enter the quantity: ";
+        cin >> quantity;
+
+        Gadget item;
+        bool found = false;
+        while (inFile >> item.product_id >> item.product_name >> item.stock_quantity >> item.cost_price >> item.selling_price
+                    >> item.items_sold >> item.brand_name) {
+            if (item.product_id == productId && item.stock_quantity >= quantity) {
+                addToBill3(item, quantity, billFile);
+
+                found = true;
+                // Update stock quantity in the gadgets file (if needed)
+                // This would involve rewriting the entire file with updated quantities
+                // or using a temporary file to update quantities
+                break;
+            }
+        }
+
+        if (!found)
+            cout << "Product not found or insufficient stock." << endl;
+
+        cout << "Do you want to add another product? (y/n): ";
+        cin >> choice;
+     inFile.close();
+     } while (choice == 'y' || choice == 'Y');
+
+   
+    billFile.close();
+
+     totalbill3= printBill("C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\gadgets_bill.txt");
+}
+
+else if (category == "healthcare") {
+
+cout << "Welcome to Healthcare section. Here are the available products:" << endl;
+    displayHealthcareFromFile("C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\healthcare.txt");
+
+    
+    ofstream billFile("C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\healthcare_bill.txt", ios::app); // Append mode to add items to bill
+
+    char choice;
+    do {
+        ifstream inFile("C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\healthcare.txt");
+        int productId, quantity;
+        cout << "Enter the Product ID you want to purchase: ";
+        cin >> productId;
+        cout << "Enter the quantity: ";
+        cin >> quantity;
+
+        Healthcare item;
+        bool found = false;
+        while (inFile >> item.product_id >> item.product_name >> item.stock_quantity >> item.cost_price >> item.selling_price
+                    >> item.items_sold >> item.brand_name >> item.category) {
+            if (item.product_id == productId && item.stock_quantity >= quantity) {
+                addToBill4(item, quantity, billFile);
+
+                found = true;
+                // Update stock quantity in the healthcare file (if needed)
+                // This would involve rewriting the entire file with updated quantities
+                // or using a temporary file to update quantities
+                break;
+            }
+        }
+
+        if (!found)
+            cout << "Product not found or insufficient stock." << endl;
+
+        cout << "Do you want to add another product? (y/n): ";
+        cin >> choice;
+    inFile.close();
+    } while (choice == 'y' || choice == 'Y');
+
+    
+    billFile.close();
+
+     totalbill4 = printBill("C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\healthcare_bill.txt");
+}
+
+else if (category == "stationary") {
+ cout << "Welcome to Stationary section. Here are the available products:" << endl;
+    displayStationaryFromFile("C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\stationary.txt");
+
+    
+    ofstream billFile(" C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\stationary_bill.txt", ios::app); // Append mode to add items to bill
+
+    char choice;
+    do {
+        ifstream inFile("C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\stationary.txt");
+        int productId, quantity;
+        cout << "Enter the Product ID you want to purchase: ";
+        cin >> productId;
+        cout << "Enter the quantity: ";
+        cin >> quantity;
+
+        Stationary item;
+        bool found = false;
+        while (inFile >> item.product_id >> item.product_name >> item.stock_quantity >> item.cost_price >> item.selling_price
+                    >> item.items_sold >> item.brand_name) {
+            if (item.product_id == productId && item.stock_quantity >= quantity) {
+                addToBill5(item, quantity, billFile);
+
+                found = true;
+                // Update stock quantity in the stationary file (if needed)
+                // This would involve rewriting the entire file with updated quantities
+                // or using a temporary file to update quantities
+                break;
+            }
+        }
+
+        if (!found)
+            cout << "Product not found or insufficient stock." << endl;
+
+        cout << "Do you want to add another product? (y/n): ";
+        cin >> choice;
+    inFile.close();
+    } while (choice == 'y' || choice == 'Y');
+
+    
+    billFile.close();
+
+     totalbill5 = printBill(" C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\stationary_bill.txt");
+}
+
+ else {
+            cout << "Invalid category! Please choose again." << endl;
+            continue;
+        }
+
+        // Ask if the customer wants to shop more
+        char choice;
+        cout << "Do you want to shop more? (y/n): ";
+        cin >> choice;
+        if (choice != 'y' && choice != 'Y') {
+            break;
+        }
+    }
+
+  updateStockQuantity1("C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\clothes.txt", "C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\src\\clothes_bill.txt");
+  updateStockQuantity2("C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\food.txt", "C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\food_bill.txt");
+  updateStockQuantity4("C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\healthcare.txt", "C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\healthcare_bill.txt");
+  updateStockQuantity3("C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\gadgets.txt", "C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\project\\Super-Mart-Management-System\\gadgets_bill.txt");
+  updateStockQuantity5("C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\stationary.txt"," C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\stationary_bill.txt");  
+
+
+cout << "Sum of Total Bill: $" << fixed << setprecision(2) << totalbill1+ totalbill2 + totalbill3 + totalbill4 + totalbill5<< endl;
+
+
+
+}
+
 
 //tohere
 void login_customer()
@@ -1134,7 +1822,7 @@ ifstream myfile("cust_file.txt");
                 reset();
                 customer C(first_name, email, phone_no , password , amt_spent,discount);
                 i=1;
-                category();
+                shop();
                 break;
             }
 
@@ -1158,7 +1846,7 @@ void signup() //newuser
     system("cls");
     cout<<endl;
     customer c;
-    cout<<"Hi!Welcome to AGRAMART :)\nEnter your name: ";
+    cout<<"Hi!Welcome to AGRAMART :)\nEnter your Full name: ";
     yellow();
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
     getline(cin,c.cust_name);
@@ -1272,7 +1960,7 @@ while (!validChoice) {
     }
  }
 int main() {
-    char choice;
+   /* char choice;
     displayFrontPage();
     _getch(); // Wait for a key press
     displayLoginPage();
@@ -1280,6 +1968,7 @@ int main() {
 
     // Clear input buffer
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    return 0;
+    return 0;*/
+    shop();
    
 }
