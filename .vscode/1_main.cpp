@@ -1599,53 +1599,53 @@ int MANAGER(staff& s)
    int c;
    cin>>c;
    if(c==1){
-    displayClothesFromFile("C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\clothes.txt");
+    displayClothesFromFile("clothes.txt");
     cout<<"ENter product id you want to update";
     int id,val;
     cin>>id;
     cout<<"enter no of items present in inventory";
     cin>>val;
-     updateStockQuantityByManagerClothes("C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\clothes.txt", id, val);
+     updateStockQuantityByManagerClothes("clothes.txt", id, val);
     }
     else if(c==2)
     {
-        displayFoodFromFile("C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\food.txt");
+        displayFoodFromFile("food.txt");
     cout<<"ENter product id you want to update";
     int id,val;
     cin>>id;
     cout<<"enter no of items present in inventory";
     cin>>val;
-     updateStockQuantityForFood("C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\food.txt", id, val);
+     updateStockQuantityForFood("food.txt", id, val);
     }
     else if(c==3)
     {
-        displayGadgetsFromFile("C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\gadgets.txt");
+        displayGadgetsFromFile("gadgets.txt");
     cout<<"ENter product id you want to update";
     int id,val;
     cin>>id;
     cout<<"enter no of items present in inventory";
     cin>>val;
-     updateStockQuantityForGadget("C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\gadgets.txt", id, val);
+     updateStockQuantityForGadget("gadgets.txt", id, val);
     }
     else if(c==4)
     {
-        displayHealthcareFromFile("C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\healthcare.txt");
+        displayHealthcareFromFile("healthcare.txt");
     cout<<"ENter product id you want to update";
     int id,val;
     cin>>id;
     cout<<"enter no of items present in inventory";
     cin>>val;
-     updateStockQuantityForHealthcare("C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\healthcare.txt", id, val);
+     updateStockQuantityForHealthcare("healthcare.txt", id, val);
     }
     else if(c==5)
     {
-        displayStationaryFromFile("C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\stationary.txt");
+        displayStationaryFromFile("stationary.txt");
     cout<<"ENter product id you want to update";
     int id,val;
     cin>>id;
     cout<<"enter no of items present in inventory";
     cin>>val;
-     updateStockQuantityForStationary("C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\stationary.txt", id, val);
+     updateStockQuantityForStationary("stationary.txt", id, val);
     }
     else{
         cout<<"wrong choice";
@@ -1657,33 +1657,33 @@ int MANAGER(staff& s)
    int c;
    cin>>c;
    if(c==1){
-   vector<Clothes> clothesList = readClothesFromFile("C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\clothes.txt");
+   vector<Clothes> clothesList = readClothesFromFile("clothes.txt");
 
     
     displayProfitForClothes(clothesList);
     }
     else if(c==2)
     {
-       vector<Food> foodList = readFoodFromFile("C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\food.txt");
+       vector<Food> foodList = readFoodFromFile("food.txt");
 
     // Display profit for each food item
     displayProfitForFood(foodList);
     }
     else if(c==3)
     {
-       vector<Gadget> gadgetList = readGadgetsFromFile("C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\gadgets.txt");
+       vector<Gadget> gadgetList = readGadgetsFromFile("gadgets.txt");
 
     displayProfitForGadgets(gadgetList);
     }
     else if(c==4)
     {
-        vector<Healthcare> healthcareList = readHealthcareFromFile("C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\healthcare.txt");
+        vector<Healthcare> healthcareList = readHealthcareFromFile("healthcare.txt");
 
     displayProfitForHealthcare(healthcareList);
     }
     else if(c==5)
     {
-       vector<Stationary> stationaryList = readStationaryFromFile("C:\\Users\\atuls\\OneDrive\\Desktop\\cpp\\project\\Super-Mart-Management-System\\stationary.txt");
+       vector<Stationary> stationaryList = readStationaryFromFile("stationary.txt");
 
     
     displayProfitForStationary(stationaryList);
